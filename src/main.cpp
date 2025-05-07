@@ -1,8 +1,9 @@
 #include <iostream>
 #include <csignal>
+#include <jengine/Game.hpp>
+#include <jengine/Controls.hpp>
 
-#include "jengine/Game.hpp"
-
+#include "Player.hpp"
 
 Game *game = NULL;
 
@@ -16,11 +17,27 @@ static void signalHandler(int signum)
 static void loadResources()
 {
     // Resources *resources = Resources::getInstance();
-
 }
 
 static void populateGame()
 {
+    Player *player = new Player();
+    game->addChild(player);
+}
+
+static void registerInputs()
+{
+    Controls *controls = Controls::getInstance();
+    if (controls == nullptr)
+    {
+        return;
+    }
+
+    controls->keyPressHandlers.push_back([](std::string key)
+                                         { 
+        if(key == "Escape") {
+            game->stop();
+        } });
 }
 
 int main()
@@ -32,6 +49,8 @@ int main()
     loadResources();
 
     populateGame();
+
+    registerInputs();
 
     Renderer *renderer = Renderer::getInstance();
 
