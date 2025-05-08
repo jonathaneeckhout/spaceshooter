@@ -8,7 +8,7 @@ class Player : public Entity
 public:
     float speed = 300.0;
 
-    Player();
+    Player(Vector position);
     ~Player();
 
     void update(float dt) override;
@@ -26,8 +26,8 @@ private:
     bool moveDown = false;
 
     void registerControls();
-    void handleKeyPress(const std::string& key);
-    void handleKeyRelease(const std::string& key);
+    void handleKeyPress(const std::string &key);
+    void handleKeyRelease(const std::string &key);
 
     void createVisuals();
 };

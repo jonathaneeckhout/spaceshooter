@@ -21,7 +21,7 @@ static void loadResources()
 
 static void populateGame()
 {
-    Player *player = new Player();
+    Player *player = new Player(Vector(400.0, 520.0));
     game->addChild(player);
 }
 

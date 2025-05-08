@@ -5,7 +5,7 @@
 
 #include "Player.hpp"
 
-Player::Player()
+Player::Player(Vector position) : Entity(position)
 {
     registerControls();
     createVisuals();
@@ -70,18 +70,18 @@ void Player::handleKeyRelease(const std::string &key)
 
 void Player::createVisuals()
 {
-    Square *wings = new Square(position - Vector{64 / 2, 32 / 2}, 64, 32);
+    Square *wings = new Square(Vector{-(64 / 2), -32 / 2}, 64, 32);
     addChild(wings);
 
-    Square *body = new Square(position - Vector{16 / 2, 48}, 16, 48);
+    Square *body = new Square(Vector{-16 / 2, -48}, 16, 48);
     body->color = {128, 128, 128, 255};
     addChild(body);
 
-    Square *leftBlaster = new Square(position - Vector{32 - 2, 24}, 2, 8);
+    Square *leftBlaster = new Square(Vector{-32, -24}, 2, 8);
     leftBlaster->color = {128, 128, 128, 255};
     addChild(leftBlaster);
 
-    Square *rightBlaster = new Square(position - Vector{-32 + 4, 24}, 2, 8);
+    Square *rightBlaster = new Square(Vector{32 - 2, -24}, 2, 8);
     rightBlaster->color = {128, 128, 128, 255};
     addChild(rightBlaster);
 }
@@ -108,7 +108,9 @@ void Player::update(float dt)
 
     velocity = velocity.normalize();
 
-    position += velocity * speed * dt;
+    Vector newPosition = getPosition() + (velocity * speed * dt);
+
+    setPosition(newPosition);
 }
 
 void Player::output() {}
