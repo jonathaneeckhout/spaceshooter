@@ -24,6 +24,8 @@ int main()
 {
     game = Game::getInstance();
 
+    game->setFPS(60);
+
     std::signal(SIGINT, signalHandler);
 
     loadGame();

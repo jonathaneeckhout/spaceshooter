@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Bullet.hpp"
+#include "projectiles/Bullet.hpp"
 
 Bullet::Bullet(Vector position, Vector direction) : Entity(position)
 {
@@ -28,7 +28,7 @@ void Bullet::update(float dt)
 
 void Bullet::createVisuals()
 {
-    Square *body = new Square(Vector{-2, -4}, 4, 8);
+    Square *body = new Square(Vector{-2, -2}, 4, 4);
 
     body->color = {0xA0, 0xFC, 0x24, 255};
 

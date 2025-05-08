@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "Player.hpp"
-#include "Bullet.hpp"
+#include "projectiles/Bullet.hpp"
 #include "SpaceShooter.hpp"
 
 Player::Player(Vector position) : Entity(position)
@@ -103,6 +103,7 @@ void Player::handleKeyRelease(const std::string &key)
 void Player::createVisuals()
 {
     Square *wings = new Square(Vector{-(64 / 2), -32 / 2}, 64, 32);
+    wings->color = {0x5D, 0x8A, 0xA8, 0xFF};
     addChild(wings);
 
     Square *body = new Square(Vector{-16 / 2, -48}, 16, 48);
@@ -156,7 +157,8 @@ void Player::updateShooting(float)
 {
     if (shootWeapon1)
     {
-        if (weapon1Timer->isRunning()) {
+        if (weapon1Timer->isRunning())
+        {
             return;
         }
 
