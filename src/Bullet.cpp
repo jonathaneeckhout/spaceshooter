@@ -1,8 +1,19 @@
+#include <iostream>
+
 #include "Bullet.hpp"
 
 Bullet::Bullet(Vector position, Vector direction) : Entity(position)
 {
     velocity = direction.normalize();
+
+    destroyTimer = new Timer(destroyTime);
+    destroyTimer->name = "DestroyTimer";
+    destroyTimer->start();
+
+    destroyTimer->setCallback([this](void *)
+                              { destroyCallback(); });
+
+    addChild(destroyTimer);
 
     createVisuals();
 }
@@ -22,4 +33,9 @@ void Bullet::createVisuals()
     body->color = {0xA0, 0xFC, 0x24, 255};
 
     addChild(body);
+}
+
+void Bullet::destroyCallback()
+{
+    queueDelete();
 }

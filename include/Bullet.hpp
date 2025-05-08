@@ -13,5 +13,11 @@ public:
     void update(float dt) override;
 
 private:
+    float destroyTime = 2.0;
+
+    Timer *destroyTimer = nullptr;
+
     void createVisuals();
+
+    void destroyCallback();
 };

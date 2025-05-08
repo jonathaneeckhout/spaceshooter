@@ -22,6 +22,11 @@ void Player::loadEntities()
     weapon1Muzzle->name = "Weapon1Muzzle";
 
     addChild(weapon1Muzzle);
+
+    weapon1Timer = new Timer(weapon1Delay);
+    weapon1Timer->name = "Weapon1Timer";
+
+    addChild(weapon1Timer);
 }
 
 void Player::registerControls()
@@ -151,7 +156,12 @@ void Player::updateShooting(float)
 {
     if (shootWeapon1)
     {
-        std::cout << "Firing weapon 1!" << std::endl;
+        if (weapon1Timer->isRunning()) {
+            return;
+        }
+
+        weapon1Timer->start();
+
         Bullet *bullet = new Bullet(weapon1Muzzle->getGlobalPosition(), Vector(0.0, -1.0));
 
         spaceShooter->addProjectile(bullet);

@@ -38,6 +38,10 @@ private:
 
     Entity *weapon1Muzzle = nullptr;
 
+    float weapon1Delay = 0.2;
+
+    Timer *weapon1Timer = nullptr;
+
     void loadEntities();
 
     void registerControls();
