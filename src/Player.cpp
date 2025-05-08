@@ -1,17 +1,28 @@
 #include <string>
 #include <iostream>
-#include <jengine/Controls.hpp>
-#include <jengine/visuals/Square.hpp>
 
 #include "Player.hpp"
+#include "Bullet.hpp"
+#include "SpaceShooter.hpp"
 
 Player::Player(Vector position) : Entity(position)
 {
+    loadEntities();
+
     registerControls();
+
     createVisuals();
 }
 
 Player::~Player() {}
+
+void Player::loadEntities()
+{
+    weapon1Muzzle = new Entity(Vector(0, -32));
+    weapon1Muzzle->name = "Weapon1Muzzle";
+
+    addChild(weapon1Muzzle);
+}
 
 void Player::registerControls()
 {
@@ -46,6 +57,14 @@ void Player::handleKeyPress(const std::string &key)
     {
         moveDown = true;
     }
+    else if (key == weapon1Key)
+    {
+        shootWeapon1 = true;
+    }
+    else if (key == weapon2Key)
+    {
+        shootWeapon2 = true;
+    }
 }
 
 void Player::handleKeyRelease(const std::string &key)
@@ -65,6 +84,14 @@ void Player::handleKeyRelease(const std::string &key)
     else if (key == moveDownKey)
     {
         moveDown = false;
+    }
+    else if (key == weapon1Key)
+    {
+        shootWeapon1 = false;
+    }
+    else if (key == weapon2Key)
+    {
+        shootWeapon2 = false;
     }
 }
 
@@ -88,7 +115,14 @@ void Player::createVisuals()
 
 void Player::update(float dt)
 {
-    velocity = {0.0, 0.0};
+    updateMovement(dt);
+    updateShooting(dt);
+}
+
+void Player::updateMovement(float dt)
+{
+    velocity = Vector();
+
     if (moveLeft)
     {
         velocity.x -= 1;
@@ -111,6 +145,22 @@ void Player::update(float dt)
     Vector newPosition = getPosition() + (velocity * speed * dt);
 
     setPosition(newPosition);
+}
+
+void Player::updateShooting(float)
+{
+    if (shootWeapon1)
+    {
+        std::cout << "Firing weapon 1!" << std::endl;
+        Bullet *bullet = new Bullet(weapon1Muzzle->getGlobalPosition(), Vector(0.0, -1.0));
+
+        spaceShooter->addProjectile(bullet);
+    }
+
+    if (shootWeapon2)
+    {
+        std::cout << "Firing weapon 2!" << std::endl;
+    }
 }
 
 void Player::output() {}

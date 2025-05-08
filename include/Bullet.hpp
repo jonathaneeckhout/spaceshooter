@@ -1,0 +1,17 @@
+#pragma once
+
+#include <jengine/jengine.hpp>
+
+class Bullet : public Entity
+{
+public:
+    float speed = 600.0;
+
+    Bullet(Vector position, Vector direction);
+    ~Bullet();
+
+    void update(float dt) override;
+
+private:
+    void createVisuals();
+};
