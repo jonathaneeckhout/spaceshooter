@@ -1,11 +1,13 @@
 #pragma once
 
+#include <string>
 #include <jengine/jengine.hpp>
 
 class Bullet : public Entity
 {
 public:
     float speed = 600.0;
+    float damage = 10.0;
 
     Bullet(Vector position, Vector direction);
     ~Bullet();
@@ -20,4 +22,6 @@ private:
     void createVisuals();
 
     void destroyCallback();
+
+    void handleCollisiontStarted(std::string);
 };

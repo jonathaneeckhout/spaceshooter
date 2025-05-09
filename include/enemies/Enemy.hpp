@@ -13,4 +13,6 @@ public:
     Enemy(Vector position);
     Enemy(Vector position, Vector velocity);
     ~Enemy();
+
+    void hurt(float amount);
 };

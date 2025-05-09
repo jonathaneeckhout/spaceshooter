@@ -15,6 +15,14 @@ Bullet::Bullet(Vector position, Vector direction) : Entity(position)
 
     addChild(destroyTimer);
 
+    CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-2, -2), Vector(4, 4));
+    collisionShape->name = "CollisionShape";
+
+    collisionShape->collisionStartHandlers.push_back([this](const std::string collisionshapeID)
+                                                     { handleCollisiontStarted(collisionshapeID); });
+
+    addChild(collisionShape);
+
     createVisuals();
 }
 
@@ -38,4 +46,9 @@ void Bullet::createVisuals()
 void Bullet::destroyCallback()
 {
     queueDelete();
+}
+
+void Bullet::handleCollisiontStarted(std::string collisionShapeID)
+{
+    std::cout << "Bullet hit: " << collisionShapeID << "\n\r";
 }

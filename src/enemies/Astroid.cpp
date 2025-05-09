@@ -3,6 +3,7 @@
 Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
 {
     speed = 150.0;
+    health = 10.0;
 
     destroyTimer = new Timer(destroyTime);
     destroyTimer->name = "DestroyTimer";
@@ -22,6 +23,10 @@ Astroid::~Astroid() {}
 
 void Astroid::loadEntities()
 {
+    CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
+    collisionShape->name = "CollisionShape";
+
+    addChild(collisionShape);
 }
 
 void Astroid::createVisuals()
