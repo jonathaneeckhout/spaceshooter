@@ -24,6 +24,8 @@ int main()
 {
     game = Game::getInstance();
 
+    game->init();
+
     game->setFPS(60);
 
     std::signal(SIGINT, signalHandler);
@@ -31,6 +33,8 @@ int main()
     loadGame();
 
     game->run();
+
+    game->cleanup();
 
     Game::deleteInstance();
 
