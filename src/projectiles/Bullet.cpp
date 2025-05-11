@@ -2,6 +2,7 @@
 
 #include "projectiles/Bullet.hpp"
 #include "enemies/Enemy.hpp"
+#include "Config.hpp"
 
 Bullet::Bullet(Vector position, Vector direction) : Entity(position)
 {
@@ -18,6 +19,9 @@ Bullet::Bullet(Vector position, Vector direction) : Entity(position)
 
     CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-2, -2), Vector(4, 4));
     collisionShape->name = "CollisionShape";
+    
+    collisionShape->inLayer = Config::NoCollisionLayer;
+    collisionShape->viewLayer = Config::EnemyCollisionLayer;
 
     collisionShape->collisionStartHandlers.push_back([this](CollisionShape *shape)
                                                      { handleCollisiontStarted(shape); });

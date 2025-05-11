@@ -1,4 +1,5 @@
 #include "enemies/Astroid.hpp"
+#include "Config.hpp"
 
 Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
 {
@@ -25,6 +26,9 @@ void Astroid::loadEntities()
 {
     CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
     collisionShape->name = "CollisionShape";
+    
+    collisionShape->inLayer = Config::EnemyCollisionLayer;
+    collisionShape->viewLayer = Config::PlayerCollisionLayer;
 
     addChild(collisionShape);
 }
