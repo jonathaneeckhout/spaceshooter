@@ -17,14 +17,12 @@ static void signalHandler(int signum)
 static void loadGame()
 {
     SpaceShooter *spaceShooter = new SpaceShooter();
-    game->addChild(spaceShooter);
+    game->setRootObject(spaceShooter);
 }
 
 int main()
 {
     game = Game::getInstance();
-
-    game->init();
 
     game->setFPS(60);
 
@@ -33,8 +31,6 @@ int main()
     loadGame();
 
     game->run();
-
-    game->cleanup();
 
     Game::deleteInstance();
 

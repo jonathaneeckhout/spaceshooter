@@ -31,7 +31,7 @@ void SpaceShooter::loadEntities()
 {
     entities = new Entity();
     entities->name = "Entities";
-    game->addChild(entities);
+    addChild(entities);
 
     projectiles = new Entity();
     projectiles->name = "Projectiles";
