@@ -23,5 +23,6 @@ private:
 
     void destroyCallback();
 
-    void handleCollisiontStarted(std::string);
+    void handleCollisiontStarted(CollisionShape *shape);
+    void handleCollisiontEnded(CollisionShape *shape);
 };

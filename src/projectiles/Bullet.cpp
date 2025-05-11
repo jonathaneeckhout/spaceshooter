@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "projectiles/Bullet.hpp"
+#include "enemies/Enemy.hpp"
 
 Bullet::Bullet(Vector position, Vector direction) : Entity(position)
 {
@@ -18,8 +19,8 @@ Bullet::Bullet(Vector position, Vector direction) : Entity(position)
     CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-2, -2), Vector(4, 4));
     collisionShape->name = "CollisionShape";
 
-    collisionShape->collisionStartHandlers.push_back([this](const std::string collisionshapeID)
-                                                     { handleCollisiontStarted(collisionshapeID); });
+    collisionShape->collisionStartHandlers.push_back([this](CollisionShape *shape)
+                                                     { handleCollisiontStarted(shape); });
 
     addChild(collisionShape);
 
@@ -48,7 +49,15 @@ void Bullet::destroyCallback()
     queueDelete();
 }
 
-void Bullet::handleCollisiontStarted(std::string collisionShapeID)
+void Bullet::handleCollisiontStarted(CollisionShape *shape)
 {
-    std::cout << "Bullet hit: " << collisionShapeID << "\n\r";
+    Enemy *enemy = dynamic_cast<Enemy *>(shape->getParent());
+    if (enemy == nullptr)
+    {
+        return;
+    }
+
+    enemy->hurt(damage);
+
+    queueDelete();
 }

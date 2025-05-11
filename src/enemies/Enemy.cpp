@@ -10,7 +10,7 @@ void Enemy::hurt(float amount)
 {
     health -= amount;
 
-    if (health < 0.0)
+    if (health <= 0.0)
     {
         health = 0.0;
 
