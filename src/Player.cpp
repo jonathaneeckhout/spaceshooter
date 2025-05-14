@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 #include "Player.hpp"
 #include "projectiles/Bullet.hpp"
@@ -8,8 +9,6 @@
 
 Player::Player(Vector position) : Body(position)
 {
-    speed = 300.0;
-
     loadEntities();
 
     registerControls();
@@ -21,12 +20,11 @@ Player::~Player() {}
 
 void Player::loadEntities()
 {
-
     collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
     collisionShape->name = "CollisionShape";
 
-    collisionShape->inLayer = Config::WorldCollisionLayer | Config::PlayerCollisionLayer;
-    collisionShape->viewLayer = Config::EnemyCollisionLayer;
+    collisionShape->inLayer = Config::WorldCollisionLayer;
+    collisionShape->viewLayer = Config::WorldCollisionLayer;
 
     addChild(collisionShape);
 
@@ -160,11 +158,17 @@ void Player::updateMovement(float dt)
 
     velocity = velocity.normalize();
 
+    if (getPosition().y < 500)
+    {
+        velocity += backDraw;
+    }
+
+    velocity *= speed;
+
     moveAndStop(dt);
 
-    // Vector newPosition = getPosition() + (velocity * speed * dt);
-
-    // setPosition(newPosition);
+    // Clamp position to the window's size
+    clampPosition();
 }
 
 void Player::updateShooting(float)
@@ -190,3 +194,15 @@ void Player::updateShooting(float)
 }
 
 void Player::output() {}
+
+void Player::clampPosition()
+{
+    Renderer *renderer = Renderer::getInstance();
+
+    Vector pos = getPosition();
+
+    pos.x = std::clamp<float>(pos.x, 0.0, renderer->windowSize.x);
+    pos.y = std::clamp<float>(pos.y, 0.0, renderer->windowSize.y);
+
+    setPosition(pos);
+}

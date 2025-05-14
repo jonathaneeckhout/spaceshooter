@@ -11,6 +11,8 @@ class Player : public Body
 public:
     SpaceShooter *spaceShooter = nullptr;
 
+    float speed = 300.0;
+
     Player(Vector position);
     ~Player();
 
@@ -31,6 +33,8 @@ private:
     bool moveUp = false;
     bool moveDown = false;
 
+    Vector backDraw = Vector(0.0, 0.4);
+
     bool shootWeapon1 = false;
     bool shootWeapon2 = false;
 
@@ -50,4 +54,6 @@ private:
 
     void updateMovement(float dt);
     void updateShooting(float dt);
+
+    void clampPosition();
 };
