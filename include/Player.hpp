@@ -6,11 +6,9 @@
 // Forward declare SpaceShooter to avoid circular include
 class SpaceShooter;
 
-class Player : public Entity
+class Player : public Body
 {
 public:
-    float speed = 300.0;
-
     SpaceShooter *spaceShooter = nullptr;
 
     Player(Vector position);

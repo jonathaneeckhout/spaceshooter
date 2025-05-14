@@ -4,9 +4,12 @@
 #include "Player.hpp"
 #include "projectiles/Bullet.hpp"
 #include "SpaceShooter.hpp"
+#include "Config.hpp"
 
-Player::Player(Vector position) : Entity(position)
+Player::Player(Vector position) : Body(position)
 {
+    speed = 300.0;
+
     loadEntities();
 
     registerControls();
@@ -18,6 +21,15 @@ Player::~Player() {}
 
 void Player::loadEntities()
 {
+
+    collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
+    collisionShape->name = "CollisionShape";
+
+    collisionShape->inLayer = Config::WorldCollisionLayer | Config::PlayerCollisionLayer;
+    collisionShape->viewLayer = Config::EnemyCollisionLayer;
+
+    addChild(collisionShape);
+
     weapon1Muzzle = new Entity(Vector(0, -32));
     weapon1Muzzle->name = "Weapon1Muzzle";
 
@@ -148,9 +160,11 @@ void Player::updateMovement(float dt)
 
     velocity = velocity.normalize();
 
-    Vector newPosition = getPosition() + (velocity * speed * dt);
+    moveAndStop(dt);
 
-    setPosition(newPosition);
+    // Vector newPosition = getPosition() + (velocity * speed * dt);
+
+    // setPosition(newPosition);
 }
 
 void Player::updateShooting(float)

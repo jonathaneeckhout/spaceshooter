@@ -1,6 +1,7 @@
 #include "SpaceShooter.hpp"
 
 #include "enemies/Astroid.hpp"
+#include "enemies/Dummy.hpp"
 
 SpaceShooter::SpaceShooter()
 {
@@ -44,6 +45,9 @@ void SpaceShooter::loadEntities()
 
     Astroid *astroid = new Astroid(Vector(400, 0));
     entities->addChild(astroid);
+
+    Dummy *dummy = new Dummy(Vector(64, 300));
+    entities->addChild(dummy);
 }
 
 void SpaceShooter::registerInputs()
