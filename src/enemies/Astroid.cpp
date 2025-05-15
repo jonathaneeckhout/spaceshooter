@@ -6,15 +6,6 @@ Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
     speed = 150.0;
     health = 10.0;
 
-    destroyTimer = new Timer(destroyTime);
-    destroyTimer->name = "DestroyTimer";
-    destroyTimer->start();
-
-    destroyTimer->setCallback([this](void *)
-                              { destroyCallback(); });
-
-    addChild(destroyTimer);
-
     loadEntities();
 
     createVisuals();
@@ -24,9 +15,18 @@ Astroid::~Astroid() {}
 
 void Astroid::loadEntities()
 {
+    destroyTimer = new Timer(destroyTime);
+    destroyTimer->name = "DestroyTimer";
+    destroyTimer->start();
+
+    destroyTimer->setCallback([this](void *)
+                              { destroyCallback(); });
+
+    addChild(destroyTimer);
+
     CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
     collisionShape->name = "CollisionShape";
-    
+
     collisionShape->inLayer = Config::EnemyCollisionLayer;
     collisionShape->viewLayer = Config::PlayerCollisionLayer;
 

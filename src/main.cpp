@@ -16,8 +16,8 @@ static void signalHandler(int signum)
 
 static void loadGame()
 {
-    SpaceShooter *spaceShooter = new SpaceShooter();
-    game->setRootObject(spaceShooter);
+    auto spaceShooter = std::make_unique<SpaceShooter>();
+    game->setRootObject(std::move(spaceShooter));
 }
 
 int main()
