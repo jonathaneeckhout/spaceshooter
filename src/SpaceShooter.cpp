@@ -7,15 +7,13 @@
 
 SpaceShooter::SpaceShooter()
 {
-    name = "SpaceShooter";
-
     Renderer *renderer = Renderer::getInstance();
     if (renderer == nullptr)
     {
         return;
     }
 
-    renderer->setWindowTitle(name);
+    renderer->setWindowTitle("SpaceShooter");
 
     game = Game::getInstance();
     if (game == nullptr)

@@ -38,11 +38,11 @@ private:
     bool shootWeapon1 = false;
     bool shootWeapon2 = false;
 
-    Entity *weapon1Muzzle = nullptr;
+    std::shared_ptr<Entity> weapon1Muzzle = nullptr;
 
     float weapon1Delay = 0.2;
 
-    Timer *weapon1Timer = nullptr;
+    std::shared_ptr<Timer> weapon1Timer = nullptr;
 
     void loadEntities();
 
