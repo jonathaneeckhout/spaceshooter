@@ -7,7 +7,11 @@
 #include "SpaceShooter.hpp"
 #include "Config.hpp"
 
-Player::Player(Vector position) : Body(position)
+Player::Player(Vector position) : Body(position) {}
+
+Player::~Player() {}
+
+void Player::init()
 {
     loadEntities();
 
@@ -16,25 +20,23 @@ Player::Player(Vector position) : Body(position)
     createVisuals();
 }
 
-Player::~Player() {}
-
 void Player::loadEntities()
 {
-    collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
-    collisionShape->name = "CollisionShape";
+    collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
+    collisionShape->setName("CollisionShape");
 
     collisionShape->inLayer = Config::WorldCollisionLayer;
     collisionShape->viewLayer = Config::WorldCollisionLayer;
 
     addChild(collisionShape);
 
-    weapon1Muzzle = new Entity(Vector(0, -32));
-    weapon1Muzzle->name = "Weapon1Muzzle";
+    weapon1Muzzle = Game::create<Entity>(Vector(0, -32));
+    weapon1Muzzle->setName("Weapon1Muzzle");
 
     addChild(weapon1Muzzle);
 
-    weapon1Timer = new Timer(weapon1Delay);
-    weapon1Timer->name = "Weapon1Timer";
+    weapon1Timer = Game::create<Timer>(weapon1Delay);
+    weapon1Timer->setName("Weapon1Timer");
 
     addChild(weapon1Timer);
 }
@@ -112,19 +114,19 @@ void Player::handleKeyRelease(const std::string &key)
 
 void Player::createVisuals()
 {
-    Square *wings = new Square(Vector{-(64 / 2), -32 / 2}, 64, 32);
+    auto wings = Game::create<Square>(Vector{-(64 / 2), -32 / 2}, 64, 32);
     wings->color = {0x5D, 0x8A, 0xA8, 0xFF};
     addChild(wings);
 
-    Square *body = new Square(Vector{-16 / 2, -48}, 16, 48);
+    auto body = Game::create<Square>(Vector{-16 / 2, -48}, 16, 48);
     body->color = {128, 128, 128, 255};
     addChild(body);
 
-    Square *leftBlaster = new Square(Vector{-32, -24}, 2, 8);
+    auto leftBlaster = Game::create<Square>(Vector{-32, -24}, 2, 8);
     leftBlaster->color = {128, 128, 128, 255};
     addChild(leftBlaster);
 
-    Square *rightBlaster = new Square(Vector{32 - 2, -24}, 2, 8);
+    auto rightBlaster = Game::create<Square>(Vector{32 - 2, -24}, 2, 8);
     rightBlaster->color = {128, 128, 128, 255};
     addChild(rightBlaster);
 }
@@ -182,7 +184,7 @@ void Player::updateShooting(float)
 
         weapon1Timer->start();
 
-        Bullet *bullet = new Bullet(weapon1Muzzle->getGlobalPosition(), Vector(0.0, -1.0));
+        auto bullet = Game::create<Bullet>(weapon1Muzzle->getGlobalPosition(), Vector(0.0, -1.0));
 
         spaceShooter->addProjectile(bullet);
     }

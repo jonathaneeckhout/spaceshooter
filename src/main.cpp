@@ -16,7 +16,7 @@ static void signalHandler(int signum)
 
 static void loadGame()
 {
-    SpaceShooter *spaceShooter = new SpaceShooter();
+    auto spaceShooter = Game::create<SpaceShooter>();
     game->setRootObject(spaceShooter);
 }
 
