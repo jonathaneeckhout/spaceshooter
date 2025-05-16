@@ -5,18 +5,21 @@ Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
 {
     speed = 150.0;
     health = 10.0;
+}
 
+Astroid::~Astroid() {}
+
+void Astroid::init()
+{
     loadEntities();
 
     createVisuals();
 }
 
-Astroid::~Astroid() {}
-
 void Astroid::loadEntities()
 {
-    destroyTimer = new Timer(destroyTime);
-    destroyTimer->name = "DestroyTimer";
+    destroyTimer = Game::create<Timer>(destroyTime);
+    destroyTimer->setName("DestroyTimer");
     destroyTimer->start();
 
     destroyTimer->setCallback([this](void *)
@@ -24,8 +27,8 @@ void Astroid::loadEntities()
 
     addChild(destroyTimer);
 
-    CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
-    collisionShape->name = "CollisionShape";
+    collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
+    collisionShape->setName("CollisionShape");
 
     collisionShape->inLayer = Config::EnemyCollisionLayer;
     collisionShape->viewLayer = Config::PlayerCollisionLayer;
@@ -35,7 +38,7 @@ void Astroid::loadEntities()
 
 void Astroid::createVisuals()
 {
-    Square *body = new Square(Vector{-16, -16}, 32, 32);
+    auto body = Game::create<Square>(Vector{-16, -16}, 32, 32);
 
     body->color = {0x5A, 0x55, 0x4C, 255};
 

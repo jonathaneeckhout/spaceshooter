@@ -16,6 +16,8 @@ public:
     Player(Vector position);
     ~Player();
 
+    void init() override;
+
     void update(float dt) override;
     void output() override;
 

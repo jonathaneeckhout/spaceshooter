@@ -10,6 +10,8 @@ public:
     Dummy(Vector position);
     ~Dummy();
 
+    void init() override;
+
     void update(float dt) override;
 
 private:

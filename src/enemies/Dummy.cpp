@@ -5,18 +5,21 @@ Dummy::Dummy(Vector position) : Enemy(position, Vector(0, 1))
 {
     speed = 150.0;
     health = 10.0;
+}
 
+Dummy::~Dummy() {}
+
+void Dummy::init()
+{
     loadEntities();
 
     createVisuals();
 }
 
-Dummy::~Dummy() {}
-
 void Dummy::loadEntities()
 {
-    CollisionShapeSquare *collisionShape = new CollisionShapeSquare(Vector(-16, -16), Vector(32, 32));
-    collisionShape->name = "CollisionShape";
+    collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
+    collisionShape->setName("CollisionShape");
 
     collisionShape->inLayer = Config::WorldCollisionLayer | Config::EnemyCollisionLayer;
     collisionShape->viewLayer = Config::PlayerCollisionLayer;
@@ -26,7 +29,7 @@ void Dummy::loadEntities()
 
 void Dummy::createVisuals()
 {
-    Square *body = new Square(Vector{-16, -16}, 32, 32);
+    auto body = Game::create<Square>(Vector{-16, -16}, 32, 32);
 
     body->color = {0x5A, 0x55, 0x4C, 255};
 

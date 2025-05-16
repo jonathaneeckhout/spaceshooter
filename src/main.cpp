@@ -16,7 +16,7 @@ static void signalHandler(int signum)
 
 static void loadGame()
 {
-    auto spaceShooter = std::make_shared<SpaceShooter>();
+    auto spaceShooter = Game::create<SpaceShooter>();
     game->setRootObject(spaceShooter);
 }
 

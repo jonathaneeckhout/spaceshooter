@@ -10,12 +10,14 @@ public:
     Astroid(Vector position);
     ~Astroid();
 
+    void init() override;
+
     void update(float dt) override;
 
 private:
     float destroyTime = 5.0;
 
-    Timer *destroyTimer = nullptr;
+    std::shared_ptr<Timer> destroyTimer;
 
     void loadEntities();
 
