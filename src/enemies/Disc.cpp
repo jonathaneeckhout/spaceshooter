@@ -51,8 +51,6 @@ void Disc::update(float dt)
     updateShooting(dt);
 }
 
-
-
 void Disc::updateMovement(float dt)
 {
     auto pos = getPosition();
@@ -87,11 +85,17 @@ void Disc::updateShooting(float)
 
     weaponTimer->start();
 
-    auto entities = static_cast<Entity *>(parent.lock().get());
+    auto player = getPlayer();
+    if (!player)
+    {
+        return;
+    }
 
-    auto map = static_cast<Map *>(entities->getParent().lock().get());
-
-    auto player = map->getPlayer().lock().get();
+    auto map = getMap();
+    if (!map)
+    {
+        return;
+    }
 
     auto zap = Game::create<Zap>(getGlobalPosition(), getGlobalPosition().directionTo(player->getGlobalPosition()));
 

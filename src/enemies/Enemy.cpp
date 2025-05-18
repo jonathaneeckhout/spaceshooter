@@ -17,3 +17,28 @@ void Enemy::hurt(float amount)
         queueDelete();
     }
 }
+
+std::shared_ptr<Map> Enemy::getMap()
+{
+    auto entity = Game::safeCast<Entity>(parent);
+    if (!entity)
+    {
+        return nullptr;
+    }
+
+    return Game::safeCast<Map>(entity->getParent());
+
+}
+
+std::shared_ptr<Player> Enemy::getPlayer()
+{
+    auto entity = Game::safeCast<Entity>(parent);
+    if (!entity)
+    {
+        return nullptr;
+    }
+
+    auto map = Game::safeCast<Map>(entity->getParent());
+
+    return Game::safeCast<Player>(map->getPlayer());
+}

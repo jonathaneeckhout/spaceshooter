@@ -1,6 +1,8 @@
 #pragma once
 
 #include <jengine/jengine.hpp>
+#include "Player.hpp"
+#include "maps/Map.hpp"
 
 class Enemy : public Body
 {
@@ -13,4 +15,8 @@ public:
     ~Enemy();
 
     void hurt(float amount);
+
+protected:
+    std::shared_ptr<Map> getMap();
+    std::shared_ptr<Player> getPlayer();
 };
