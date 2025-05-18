@@ -1,6 +1,4 @@
-#include <iostream>
-
-#include "projectiles/Bullet.hpp"
+#include "projectiles/player/Bullet.hpp"
 #include "enemies/Enemy.hpp"
 #include "Config.hpp"
 
@@ -44,7 +42,7 @@ void Bullet::update(float dt)
 
 void Bullet::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-2, -2}, 4, 4);
+    auto body = Game::create<Square>(Vector{-2, -2}, 4, 8);
 
     body->color = {0xA0, 0xFC, 0x24, 255};
 

@@ -11,7 +11,7 @@ class Player : public Body
 public:
     SpaceShooter *spaceShooter = nullptr;
 
-    float speed = 300.0;
+    float speed = 400.0;
 
     Player(Vector position);
     ~Player();

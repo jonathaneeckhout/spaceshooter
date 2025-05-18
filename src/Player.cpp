@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include "Player.hpp"
-#include "projectiles/Bullet.hpp"
+#include "projectiles/player/Bullet.hpp"
 #include "SpaceShooter.hpp"
 #include "Config.hpp"
 

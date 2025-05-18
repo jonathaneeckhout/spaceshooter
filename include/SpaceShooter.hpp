@@ -9,7 +9,7 @@ class QueuedEntity
 {
 public:
     float loadTime = 0;
-    std::shared_ptr<Entity> entity = nullptr;
+    std::vector<std::shared_ptr<Entity>> entities;
 };
 
 class SpaceShooter : public Object
@@ -24,6 +24,8 @@ public:
 
     bool addProjectile(std::shared_ptr<Entity> projectile);
 
+    std::weak_ptr<Player> getPlayer();
+
 private:
     Game *game = nullptr;
     std::shared_ptr<Player> player;
@@ -37,6 +39,6 @@ private:
     void loadEntities();
     void registerInputs();
     void loadEnityQueue();
-    void pushEntityToQueue(float loadTime, std::shared_ptr<Entity> entity);
+    void pushEntityToQueue(float loadTime, std::vector<std::shared_ptr<Entity>> entity);
     void queueTimerCallback();
 };
