@@ -2,7 +2,7 @@
 #include <csignal>
 #include <jengine/jengine.hpp>
 
-#include "SpaceShooter.hpp"
+#include "maps/AstroidField.hpp"
 #include "Player.hpp"
 
 Game *game = NULL;
@@ -16,8 +16,8 @@ static void signalHandler(int signum)
 
 static void loadGame()
 {
-    auto spaceShooter = Game::create<SpaceShooter>();
-    game->setRootObject(spaceShooter);
+    auto map = Game::create<AstroidField>();
+    game->setRootObject(map);
 }
 
 int main()
@@ -29,6 +29,10 @@ int main()
     std::signal(SIGINT, signalHandler);
 
     loadGame();
+
+    Renderer *renderer = Renderer::getInstance();
+
+    renderer->setWindowTitle("SpaceShooter");
 
     game->run();
 

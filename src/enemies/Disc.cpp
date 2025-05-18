@@ -2,12 +2,12 @@
 #include "Config.hpp"
 #include "Player.hpp"
 #include "projectiles/enemies/Zap.hpp"
-#include "SpaceShooter.hpp"
+#include "maps/Map.hpp"
 
 Disc::Disc(Vector position) : Enemy(position)
 {
     speed = 100.0;
-    health = 10.0;
+    health = 30.0;
     velocity = Vector(1.0, 0.0);
 };
 
@@ -87,13 +87,13 @@ void Disc::updateShooting(float)
 
     weaponTimer->start();
 
-    auto entities = static_cast<SpaceShooter *>(parent.lock().get());
+    auto entities = static_cast<Entity *>(parent.lock().get());
 
-    auto spaceShooter = static_cast<SpaceShooter *>(entities->getParent().lock().get());
+    auto map = static_cast<Map *>(entities->getParent().lock().get());
 
-    auto player = spaceShooter->getPlayer().lock().get();
+    auto player = map->getPlayer().lock().get();
 
     auto zap = Game::create<Zap>(getGlobalPosition(), getGlobalPosition().directionTo(player->getGlobalPosition()));
 
-    spaceShooter->addProjectile(zap);
+    map->addProjectile(zap);
 }

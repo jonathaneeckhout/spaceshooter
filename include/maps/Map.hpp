@@ -12,11 +12,11 @@ public:
     std::vector<std::shared_ptr<Entity>> entities;
 };
 
-class SpaceShooter : public Object
+class Map : public Object
 {
 public:
-    SpaceShooter();
-    ~SpaceShooter();
+    Map();
+    ~Map();
 
     void init() override;
 
@@ -26,7 +26,7 @@ public:
 
     std::weak_ptr<Player> getPlayer();
 
-private:
+protected:
     Game *game = nullptr;
     std::shared_ptr<Player> player;
 
@@ -38,7 +38,8 @@ private:
 
     void loadEntities();
     void registerInputs();
-    void loadEnityQueue();
+
+    virtual void loadEnityQueue();
     void pushEntityToQueue(float loadTime, std::vector<std::shared_ptr<Entity>> entity);
     void queueTimerCallback();
 };

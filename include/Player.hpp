@@ -3,13 +3,13 @@
 #include <string>
 #include <jengine/jengine.hpp>
 
-// Forward declare SpaceShooter to avoid circular include
-class SpaceShooter;
+// Forward declare Map to avoid circular include
+class Map;
 
 class Player : public Body
 {
 public:
-    SpaceShooter *spaceShooter = nullptr;
+    Map *map = nullptr;
 
     float speed = 400.0;
 

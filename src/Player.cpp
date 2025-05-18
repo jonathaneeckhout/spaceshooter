@@ -4,7 +4,7 @@
 
 #include "Player.hpp"
 #include "projectiles/player/Bullet.hpp"
-#include "SpaceShooter.hpp"
+#include "maps/Map.hpp"
 #include "Config.hpp"
 
 Player::Player(Vector position) : Body(position) {}
@@ -186,7 +186,7 @@ void Player::updateShooting(float)
 
         auto bullet = Game::create<Bullet>(weapon1Muzzle->getGlobalPosition(), Vector(0.0, -1.0));
 
-        spaceShooter->addProjectile(bullet);
+        map->addProjectile(bullet);
     }
 
     if (shootWeapon2)
