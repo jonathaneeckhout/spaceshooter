@@ -21,7 +21,12 @@ public:
     void update(float dt) override;
     void output() override;
 
+    void hurt(float amount);
+
 private:
+    float health = 100.0;
+    float maxHealth = health;
+
     const std::string moveLeftKey = "A";
     const std::string moveRightKey = "D";
     const std::string moveUpKey = "W";
@@ -40,11 +45,13 @@ private:
     bool shootWeapon1 = false;
     bool shootWeapon2 = false;
 
-    std::shared_ptr<Entity> weapon1Muzzle = nullptr;
+    std::shared_ptr<Entity> weapon1Muzzle;
 
     float weapon1Delay = 0.2;
 
-    std::shared_ptr<Timer> weapon1Timer = nullptr;
+    std::shared_ptr<Timer> weapon1Timer;
+
+    std::shared_ptr<CollisionShapeSquare> hurtBox;
 
     void loadEntities();
 

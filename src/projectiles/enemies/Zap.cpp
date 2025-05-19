@@ -1,5 +1,6 @@
 #include "projectiles/enemies/Zap.hpp"
 #include "Config.hpp"
+#include "Player.hpp"
 
 Zap::Zap(Vector position, Vector direction) : Entity(position)
 {
@@ -55,4 +56,19 @@ void Zap::destroyCallback()
 
 void Zap::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
 {
+    auto shapePtr = shape.lock();
+    if (!shapePtr)
+    {
+        return;
+    }
+
+    auto player = Game::safeCast<Player>(shapePtr->getParent());
+    if (player == nullptr)
+    {
+        return;
+    }
+
+    player->hurt(damage);
+
+    queueDelete();
 }

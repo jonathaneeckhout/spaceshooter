@@ -62,15 +62,7 @@ void Bullet::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
         return;
     }
 
-    auto shapeParent = shapePtr->getParent();
-
-    auto shapeParentPtr = shapeParent.lock();
-    if (!shapeParentPtr)
-    {
-        return;
-    }
-
-    Enemy *enemy = dynamic_cast<Enemy *>(shapeParentPtr.get());
+    auto enemy = Game::safeCast<Enemy>(shapePtr->getParent());
     if (enemy == nullptr)
     {
         return;

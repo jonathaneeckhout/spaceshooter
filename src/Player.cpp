@@ -30,6 +30,14 @@ void Player::loadEntities()
 
     addChild(collisionShape);
 
+    hurtBox = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
+    hurtBox->setName("HurtBox");
+
+    hurtBox->inLayer = Config::PlayerCollisionLayer;
+    hurtBox->viewLayer = Config::NoCollisionLayer;
+
+    addChild(hurtBox);
+
     weapon1Muzzle = Game::create<Entity>(Vector(0, -32));
     weapon1Muzzle->setName("Weapon1Muzzle");
 
@@ -207,4 +215,18 @@ void Player::clampPosition()
     pos.y = std::clamp<float>(pos.y, 0.0, renderer->windowSize.y);
 
     setPosition(pos);
+}
+
+void Player::hurt(float amount)
+{
+    health -= amount;
+
+    if (health <= 0.0)
+    {
+        health = 0.0;
+
+        std::cout << "Goodbye Cruel World!\n\r";
+
+        queueDelete();
+    }
 }
