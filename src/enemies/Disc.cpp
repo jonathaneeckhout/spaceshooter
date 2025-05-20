@@ -91,6 +91,11 @@ void Disc::updateShooting(float)
         return;
     }
 
+    if (!player->isPartOfGame())
+    {
+        return;
+    }
+
     auto map = getMap();
     if (!map)
     {
