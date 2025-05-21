@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-#include "Player.hpp"
+#include "player/Player.hpp"
 #include "projectiles/player/Bullet.hpp"
 #include "maps/Map.hpp"
 #include "Config.hpp"
@@ -47,6 +47,15 @@ void Player::loadEntities()
     weapon1Timer->setName("Weapon1Timer");
 
     addChild(weapon1Timer);
+
+    UI = Game::create<Object>();
+    UI->setName("UI");
+    addChild(UI);
+
+    healthBar = Game::create<HealthBar>(Vector(16.0, 16.0), health, maxHealth);
+    healthBar->setName("HealthBar");
+
+    UI->addChild(healthBar);
 }
 
 void Player::registerControls()
@@ -229,4 +238,6 @@ void Player::hurt(float amount)
 
         queueDelete();
     }
+
+    healthBar->setHealth(health);
 }

@@ -4,7 +4,7 @@
 
 #include <jengine/jengine.hpp>
 #include "maps/Map.hpp"
-#include "Player.hpp"
+#include "player/Player.hpp"
 
 class AstroidField : public Map
 {

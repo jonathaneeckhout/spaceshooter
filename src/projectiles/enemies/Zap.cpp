@@ -1,6 +1,6 @@
 #include "projectiles/enemies/Zap.hpp"
 #include "Config.hpp"
-#include "Player.hpp"
+#include "player/Player.hpp"
 
 Zap::Zap(Vector position, Vector direction) : Entity(position)
 {

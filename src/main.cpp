@@ -3,7 +3,7 @@
 #include <jengine/jengine.hpp>
 
 #include "maps/AstroidField.hpp"
-#include "Player.hpp"
+#include "player/Player.hpp"
 
 Game *game = NULL;
 

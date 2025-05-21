@@ -3,7 +3,7 @@
 #include <queue>
 
 #include <jengine/jengine.hpp>
-#include "Player.hpp"
+#include "player/Player.hpp"
 
 class QueuedEntity
 {

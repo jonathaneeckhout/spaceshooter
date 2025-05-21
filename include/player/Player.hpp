@@ -2,6 +2,7 @@
 
 #include <string>
 #include <jengine/jengine.hpp>
+#include "player/HealthBar.hpp"
 
 // Forward declare Map to avoid circular include
 class Map;
@@ -51,7 +52,11 @@ private:
 
     std::shared_ptr<Timer> weapon1Timer;
 
+    std::shared_ptr<Object> UI;
+
     std::shared_ptr<CollisionShapeSquare> hurtBox;
+
+    std::shared_ptr<HealthBar> healthBar;
 
     void loadEntities();
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <jengine/jengine.hpp>
-#include "Player.hpp"
+#include "player/Player.hpp"
 #include "maps/Map.hpp"
 
 class Enemy : public Body

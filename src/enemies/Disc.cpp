@@ -1,6 +1,6 @@
 #include "enemies/Disc.hpp"
 #include "Config.hpp"
-#include "Player.hpp"
+#include "player/Player.hpp"
 #include "projectiles/enemies/Zap.hpp"
 #include "maps/Map.hpp"
 
