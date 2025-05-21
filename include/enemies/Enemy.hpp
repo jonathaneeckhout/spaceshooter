@@ -19,4 +19,6 @@ public:
 protected:
     std::shared_ptr<Map> getMap();
     std::shared_ptr<Player> getPlayer();
+
+    virtual void dropLoot();
 };

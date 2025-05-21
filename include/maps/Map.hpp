@@ -4,6 +4,7 @@
 
 #include <jengine/jengine.hpp>
 #include "player/Player.hpp"
+#include "powerups/Powerup.hpp"
 
 class QueuedEntity
 {
@@ -23,6 +24,7 @@ public:
     void update(float dt) override;
 
     bool addProjectile(std::shared_ptr<Entity> projectile);
+    bool addPowerup(std::shared_ptr<Entity> powerup);
 
     std::weak_ptr<Player> getPlayer();
 
@@ -32,6 +34,7 @@ protected:
 
     std::shared_ptr<Entity> entities;
     std::shared_ptr<Entity> projectiles;
+    std::shared_ptr<Entity> powerups;
 
     std::shared_ptr<Timer> queueTimer;
     std::queue<QueuedEntity *> entityQueue;

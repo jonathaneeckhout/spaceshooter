@@ -23,6 +23,7 @@ public:
     void output() override;
 
     void hurt(float amount);
+    void heal(float amount);
 
 private:
     float health = 100.0;
@@ -41,8 +42,6 @@ private:
     bool moveUp = false;
     bool moveDown = false;
 
-    Vector backDraw = Vector(0.0, 0.4);
-
     bool shootWeapon1 = false;
     bool shootWeapon2 = false;
 
@@ -55,6 +54,8 @@ private:
     std::shared_ptr<Object> UI;
 
     std::shared_ptr<CollisionShapeSquare> hurtBox;
+
+    std::shared_ptr<CollisionShapeSquare> lootBox;
 
     std::shared_ptr<HealthBar> healthBar;
 
@@ -70,4 +71,6 @@ private:
     void updateShooting(float dt);
 
     void clampPosition();
+
+    void setHealth(float amount);
 };

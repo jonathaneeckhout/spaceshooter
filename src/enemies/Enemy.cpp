@@ -14,6 +14,8 @@ void Enemy::hurt(float amount)
     {
         health = 0.0;
 
+        dropLoot();
+
         queueDelete();
     }
 }
@@ -27,7 +29,6 @@ std::shared_ptr<Map> Enemy::getMap()
     }
 
     return Game::safeCast<Map>(entity->getParent());
-
 }
 
 std::shared_ptr<Player> Enemy::getPlayer()
@@ -42,3 +43,5 @@ std::shared_ptr<Player> Enemy::getPlayer()
 
     return Game::safeCast<Player>(map->getPlayer());
 }
+
+void Enemy::dropLoot() {}

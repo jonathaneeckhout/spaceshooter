@@ -42,6 +42,10 @@ void Map::loadEntities()
     projectiles->setName("Projectiles");
     entities->addChild(projectiles);
 
+    powerups = Game::create<Entity>();
+    powerups->setName("Powerups");
+    entities->addChild(powerups);
+
     player = Game::create<Player>(Vector(400.0, 520.0));
     player->setName("Player");
     player->map = this;
@@ -89,6 +93,11 @@ void Map::registerInputs()
 bool Map::addProjectile(std::shared_ptr<Entity> projectile)
 {
     return projectiles->addChild(projectile);
+}
+
+bool Map::addPowerup(std::shared_ptr<Entity> projectile)
+{
+    return powerups->addChild(projectile);
 }
 
 void Map::loadEnityQueue() {}

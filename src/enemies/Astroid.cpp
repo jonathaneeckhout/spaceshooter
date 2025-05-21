@@ -1,5 +1,6 @@
 #include "enemies/Astroid.hpp"
 #include "Config.hpp"
+#include "powerups/HealthPack.hpp"
 
 Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
 {
@@ -55,4 +56,14 @@ void Astroid::update(float dt)
 void Astroid::destroyCallback()
 {
     queueDelete();
+}
+
+void Astroid::dropLoot()
+{
+    // TODO: make random drop rate
+    auto healthPack = Game::create<HealthPack>(getPosition());
+
+    auto map = getMap();
+
+    map->addPowerup(healthPack);
 }

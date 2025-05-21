@@ -38,6 +38,14 @@ void Player::loadEntities()
 
     addChild(hurtBox);
 
+    lootBox = Game::create<CollisionShapeSquare>(Vector(-32, -32), Vector(64, 64));
+    lootBox->setName("LootBox");
+
+    lootBox->inLayer = Config::PowerupCollisionLayer;
+    lootBox->viewLayer = Config::NoCollisionLayer;
+
+    addChild(lootBox);
+
     weapon1Muzzle = Game::create<Entity>(Vector(0, -32));
     weapon1Muzzle->setName("Weapon1Muzzle");
 
@@ -177,11 +185,6 @@ void Player::updateMovement(float dt)
 
     velocity = velocity.normalize();
 
-    if (getPosition().y < 500)
-    {
-        velocity += backDraw;
-    }
-
     velocity *= speed;
 
     moveAndStop(dt);
@@ -228,16 +231,22 @@ void Player::clampPosition()
 
 void Player::hurt(float amount)
 {
-    health -= amount;
+    setHealth(health - amount);
 
     if (health <= 0.0)
     {
-        health = 0.0;
-
-        std::cout << "Goodbye Cruel World!\n\r";
-
         queueDelete();
     }
+}
+
+void Player::heal(float amount)
+{
+    setHealth(health + amount);
+}
+
+void Player::setHealth(float amount)
+{
+    health = std::clamp<float>(amount, 0, maxHealth);
 
     healthBar->setHealth(health);
 }

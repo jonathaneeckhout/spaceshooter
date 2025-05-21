@@ -14,6 +14,9 @@ public:
 
     void update(float dt) override;
 
+protected:
+    void dropLoot() override;
+
 private:
     float destroyTime = 5.0;
 
