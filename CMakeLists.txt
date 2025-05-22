@@ -1,18 +1,28 @@
-cmake_minimum_required(VERSION 3.10)
-project(Spaceshooter)
+cmake_minimum_required(VERSION 3.20)
+project(Spaceshooter LANGUAGES CXX)
 
-# Use clang++ and set flags
-set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
 # set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-find_package(JEngine REQUIRED)
+set(USE_LOCAL_ENGINE true) # Set to ON to use local directory of engine
+
+if(USE_LOCAL_ENGINE)
+    # Local development: use engine from ../myengine (or wherever it's checked out)
+    add_subdirectory(../jengine jengine-build)
+else()
+    # Fetch the engine as a subproject from Git
+    include(FetchContent)
+    FetchContent_Declare(
+        JEngine
+        GIT_REPOSITORY https://github.com/jonathaneeckhout/jengine.git
+        GIT_TAG main
+    )
+    FetchContent_MakeAvailable(JEngine)
+endif()
 
 # Find all .cpp source files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -23,8 +33,4 @@ add_executable(Spaceshooter ${SOURCES})
 # Include headers
 target_include_directories(Spaceshooter PRIVATE include)
 
-target_link_libraries(Spaceshooter
-    PRIVATE
-    JEngine::JEngine
-    SDL2::SDL2
-    SDL2_ttf::SDL2_ttf)
+target_link_libraries(Spaceshooter PRIVATE JEngine)
