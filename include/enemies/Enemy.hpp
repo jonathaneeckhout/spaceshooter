@@ -21,6 +21,8 @@ protected:
     std::shared_ptr<Map> getMap();
     std::shared_ptr<Player> getPlayer();
 
+    bool deleteOffscreen();
+
     void giveScore();
 
     virtual void dropLoot();

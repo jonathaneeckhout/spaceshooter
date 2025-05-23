@@ -54,21 +54,50 @@ void Disc::update(float dt)
 
 void Disc::updateMovement(float dt)
 {
+    if (deleteOffscreen())
+    {
+        return;
+    }
+
     auto pos = getPosition();
 
-    if (pos.x > 700)
+    Vector movement(0.0f, 0.0f);
+
+    if (movingDown)
     {
-        velocity.x = -1.0;
+        float dropStep = speed * dt;
+        if (dropStep >= remainingDropDistance)
+        {
+            movement.y = remainingDropDistance;
+            remainingDropDistance = 0.0f;
+            movingDown = false;
+        }
+        else
+        {
+            movement.y = dropStep;
+            remainingDropDistance -= dropStep;
+        }
     }
-    else if (pos.x < 100)
+    else
     {
-        velocity.x = 1.0;
+        // Check for edge collision
+        if (goingRight && pos.x > 700)
+        {
+            goingRight = false;
+            movingDown = true;
+            remainingDropDistance = 128.0f;
+        }
+        else if (!goingRight && pos.x < 100)
+        {
+            goingRight = true;
+            movingDown = true;
+            remainingDropDistance = 96.0f;
+        }
+
+        movement.x = (goingRight ? 1.0f : -1.0f) * speed * dt;
     }
 
-    velocity = velocity.normalize();
-
-    Vector newPosition = pos + velocity * speed * dt;
-
+    Vector newPosition = pos + movement;
     setPosition(newPosition);
 }
 

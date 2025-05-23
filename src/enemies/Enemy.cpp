@@ -58,3 +58,21 @@ void Enemy::giveScore()
 }
 
 void Enemy::dropLoot() {}
+
+bool Enemy::deleteOffscreen()
+{
+    auto pos = getPosition();
+
+    const float leftBound = -64.0f;
+    const float rightBound = 800.0f + 64.0f;
+    const float topBound = -64.0f;
+    const float bottomBound = 600.0f + 64.0f;
+
+    if (pos.x < leftBound || pos.x > rightBound || pos.y < topBound || pos.y > bottomBound)
+    {
+        queueDelete();
+        return true;
+    }
+
+    return false;
+}

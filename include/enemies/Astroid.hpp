@@ -18,13 +18,7 @@ protected:
     void dropLoot() override;
 
 private:
-    float destroyTime = 5.0;
-
-    std::shared_ptr<Timer> destroyTimer;
-
     void loadEntities();
 
     void createVisuals();
-
-    void destroyCallback();
 };

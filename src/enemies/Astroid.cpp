@@ -20,15 +20,6 @@ void Astroid::init()
 
 void Astroid::loadEntities()
 {
-    destroyTimer = Game::create<Timer>(destroyTime);
-    destroyTimer->setName("DestroyTimer");
-    destroyTimer->start();
-
-    destroyTimer->setCallback([this](void *)
-                              { destroyCallback(); });
-
-    addChild(destroyTimer);
-
     collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
     collisionShape->setName("CollisionShape");
 
@@ -49,14 +40,14 @@ void Astroid::createVisuals()
 
 void Astroid::update(float dt)
 {
+    if (deleteOffscreen())
+    {
+        return;
+    }
+
     Vector newPosition = getPosition() + velocity * speed * dt;
 
     setPosition(newPosition);
-}
-
-void Astroid::destroyCallback()
-{
-    queueDelete();
 }
 
 void Astroid::dropLoot()

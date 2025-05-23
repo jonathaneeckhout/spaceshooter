@@ -15,6 +15,10 @@ public:
 private:
     float weaponDelay = 1.0;
 
+    bool goingRight = true;
+    bool movingDown = false;
+    float remainingDropDistance = 0.0f;
+
     std::shared_ptr<Timer> weaponTimer;
 
     void loadEntities();
