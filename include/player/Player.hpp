@@ -3,6 +3,7 @@
 #include <string>
 #include <jengine/jengine.hpp>
 #include "player/HealthBar.hpp"
+#include "player/Score.hpp"
 
 // Forward declare Map to avoid circular include
 class Map;
@@ -58,6 +59,8 @@ private:
     std::shared_ptr<CollisionShapeSquare> lootBox;
 
     std::shared_ptr<HealthBar> healthBar;
+
+    std::shared_ptr<Score> score;
 
     void loadEntities();
 

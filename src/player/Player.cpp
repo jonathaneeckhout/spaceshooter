@@ -64,6 +64,11 @@ void Player::loadEntities()
     healthBar->setName("HealthBar");
 
     UI->addChild(healthBar);
+
+    score = Game::create<Score>(Vector(16.0, 16.0));
+    score->setName("Score");
+
+    UI->addChild(score);
 }
 
 void Player::registerControls()

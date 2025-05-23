@@ -1,0 +1,4 @@
+﻿The FontStruction “8x8 square roguelike ASCII font”
+(https://fontstruct.com/fontstructions/show/2367286) by “Deadlywere” is
+licensed under a Creative Commons Attribution Share Alike license
+(http://creativecommons.org/licenses/by-sa/4.0/).

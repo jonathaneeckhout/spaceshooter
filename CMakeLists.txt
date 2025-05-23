@@ -31,6 +31,9 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_executable(Spaceshooter ${SOURCES})
 
 # Include headers
-target_include_directories(Spaceshooter PRIVATE include)
+target_include_directories(Spaceshooter PRIVATE
+    include
+    assets
+)
 
 target_link_libraries(Spaceshooter PRIVATE JEngine)
