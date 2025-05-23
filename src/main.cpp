@@ -19,7 +19,7 @@ static void loadResources()
 {
     Resources *resources = Resources::getInstance();
 
-    resources->loadFont("default", __8x8_square_roguelike_ascii_font_ttf, __8x8_square_roguelike_ascii_font_ttf_len);
+    resources->loadResource("defaultFont", __8x8_square_roguelike_ascii_font_ttf, __8x8_square_roguelike_ascii_font_ttf_len);
 }
 
 static void loadGame()

@@ -6,6 +6,7 @@ Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
 {
     speed = 150.0;
     health = 10.0;
+    score = 5;
 }
 
 Astroid::~Astroid() {}

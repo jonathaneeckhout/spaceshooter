@@ -3,15 +3,12 @@
 #include <string>
 #include <jengine/jengine.hpp>
 #include "player/HealthBar.hpp"
-#include "player/Score.hpp"
-
-// Forward declare Map to avoid circular include
-class Map;
+#include "player/ScoreBar.hpp"
 
 class Player : public Body
 {
 public:
-    Map *map = nullptr;
+    class Map *map = nullptr;
 
     float speed = 400.0;
 
@@ -26,9 +23,12 @@ public:
     void hurt(float amount);
     void heal(float amount);
 
+    void addScore(unsigned int amount);
+
 private:
     float health = 100.0;
     float maxHealth = health;
+    unsigned int score = 0;
 
     const std::string moveLeftKey = "A";
     const std::string moveRightKey = "D";
@@ -60,7 +60,7 @@ private:
 
     std::shared_ptr<HealthBar> healthBar;
 
-    std::shared_ptr<Score> score;
+    std::shared_ptr<ScoreBar> scoreBar;
 
     void loadEntities();
 

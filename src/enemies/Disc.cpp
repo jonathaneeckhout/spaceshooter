@@ -9,6 +9,7 @@ Disc::Disc(Vector position) : Enemy(position)
     speed = 100.0;
     health = 30.0;
     velocity = Vector(1.0, 0.0);
+    score = 30;
 };
 
 Disc::~Disc() {};

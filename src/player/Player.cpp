@@ -60,15 +60,15 @@ void Player::loadEntities()
     UI->setName("UI");
     addChild(UI);
 
-    healthBar = Game::create<HealthBar>(Vector(16.0, 16.0), health, maxHealth);
+    healthBar = Game::create<HealthBar>(Vector(800 - 132, 600 - 48.0), health, maxHealth);
     healthBar->setName("HealthBar");
 
     UI->addChild(healthBar);
 
-    score = Game::create<Score>(Vector(16.0, 16.0));
-    score->setName("Score");
+    scoreBar = Game::create<ScoreBar>(Vector(16.0, 600 - 48.0));
+    scoreBar->setName("ScoreBar");
 
-    UI->addChild(score);
+    UI->addChild(scoreBar);
 }
 
 void Player::registerControls()
@@ -254,4 +254,11 @@ void Player::setHealth(float amount)
     health = std::clamp<float>(amount, 0, maxHealth);
 
     healthBar->setHealth(health);
+}
+
+void Player::addScore(unsigned int amount)
+{
+    score += amount;
+
+    scoreBar->setScore(score);
 }

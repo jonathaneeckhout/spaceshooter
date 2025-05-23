@@ -9,6 +9,7 @@ class Enemy : public Body
 public:
     float speed = 0.0;
     float health = 100.0;
+    unsigned int score = 0;
 
     Enemy(Vector position);
     Enemy(Vector position, Vector velocity);
@@ -19,6 +20,8 @@ public:
 protected:
     std::shared_ptr<Map> getMap();
     std::shared_ptr<Player> getPlayer();
+
+    void giveScore();
 
     virtual void dropLoot();
 };

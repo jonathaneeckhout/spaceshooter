@@ -2,11 +2,11 @@
 
 #include <jengine/jengine.hpp>
 
-class Score : public Entity
+class ScoreBar : public Entity
 {
 public:
-    Score(Vector position);
-    ~Score();
+    ScoreBar(Vector position);
+    ~ScoreBar();
 
     void init() override;
 
@@ -15,7 +15,7 @@ public:
 private:
     unsigned int score = 0;
 
-    // std::shared_ptr<Label> scoreLabel;
+    std::shared_ptr<Text> scoreText;
 
     void createVisuals();
 };
