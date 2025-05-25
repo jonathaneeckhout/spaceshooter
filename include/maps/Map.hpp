@@ -43,6 +43,8 @@ protected:
     void registerInputs();
 
     virtual void loadEnityQueue();
+    virtual void playBackgroundSound();
+
     void pushEntityToQueue(float loadTime, std::vector<std::shared_ptr<Entity>> entity);
     void queueTimerCallback();
 };

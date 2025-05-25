@@ -27,3 +27,12 @@ void AstroidField::loadEnityQueue()
     pushEntityToQueue(1.0, std::vector<std::shared_ptr<Entity>>{Game::create<Astroid>(Vector(500, 0)), Game::create<Astroid>(Vector(600, 0))});
     pushEntityToQueue(0.5, std::vector<std::shared_ptr<Entity>>{Game::create<Astroid>(Vector(500, 0)), Game::create<Astroid>(Vector(600, 0))});
 }
+
+void AstroidField::playBackgroundSound()
+{
+    auto mixer = Mixer::getInstance();
+
+    mixer->loadSound("background-drum-and-bass", "../assets/audio/music/background-drum-and-bass/background-drum-and-bass-117717.mp3");
+
+    mixer->playSound("background-drum-and-bass");
+}

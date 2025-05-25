@@ -30,6 +30,8 @@ void Map::init()
     registerInputs();
 
     loadEnityQueue();
+
+    playBackgroundSound();
 }
 
 void Map::loadEntities()
@@ -101,6 +103,8 @@ bool Map::addPowerup(std::shared_ptr<Entity> projectile)
 }
 
 void Map::loadEnityQueue() {}
+
+void Map::playBackgroundSound() {}
 
 void Map::pushEntityToQueue(float loadTime, std::vector<std::shared_ptr<Entity>> entity)
 {
