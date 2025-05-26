@@ -52,7 +52,11 @@ void Astroid::update(float dt)
 
 void Astroid::dropLoot()
 {
-    // TODO: make random drop rate
+    if (!Game::getInstance()->shouldHappen(0.1))
+    {
+        return;
+    }
+
     auto healthPack = Game::create<HealthPack>(getPosition());
 
     auto map = getMap();
