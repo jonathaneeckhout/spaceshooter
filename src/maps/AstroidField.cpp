@@ -30,9 +30,5 @@ void AstroidField::loadEnityQueue()
 
 void AstroidField::playBackgroundSound()
 {
-    auto mixer = Mixer::getInstance();
-
-    mixer->loadSound("background-drum-and-bass", "../assets/audio/music/background-drum-and-bass/background-drum-and-bass-117717.mp3");
-
-    mixer->playSound("background-drum-and-bass");
+    Mixer::getInstance()->playSound("backgroundDNB");
 }

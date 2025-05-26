@@ -112,6 +112,18 @@ void Player::handleKeyPress(const std::string &key)
     {
         shootWeapon2 = true;
     }
+    else if (key == muteMusicKey)
+    {
+        auto mixer = Mixer::getInstance();
+        if (mixer->isMuted())
+        {
+            mixer->unMute();
+        }
+        else
+        {
+            mixer->mute();
+        }
+    }
 }
 
 void Player::handleKeyRelease(const std::string &key)
@@ -240,6 +252,8 @@ void Player::hurt(float amount)
 
     if (health <= 0.0)
     {
+        Mixer::getInstance()->playSound("PlayerDestroyedExplosion");
+
         queueDelete();
     }
 }

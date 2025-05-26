@@ -32,6 +32,8 @@ void Bullet::init()
     addChild(collisionShape);
 
     createVisuals();
+
+    Mixer::getInstance()->playSound("bullet");
 }
 
 void Bullet::update(float dt)
@@ -69,6 +71,8 @@ void Bullet::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
     }
 
     enemy->hurt(damage);
+
+    Mixer::getInstance()->playSound("bulletImpact");
 
     queueDelete();
 }

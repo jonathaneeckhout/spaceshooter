@@ -32,6 +32,8 @@ void Zap::init()
     addChild(collisionShape);
 
     createVisuals();
+
+    Mixer::getInstance()->playSound("zap");
 }
 
 void Zap::update(float dt)
@@ -69,6 +71,8 @@ void Zap::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
     }
 
     player->hurt(damage);
+
+    Mixer::getInstance()->playSound("ZapImpact");
 
     queueDelete();
 }

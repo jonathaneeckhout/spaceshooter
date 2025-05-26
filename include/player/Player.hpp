@@ -38,6 +38,8 @@ private:
     const std::string weapon1Key = "Keypad 1";
     const std::string weapon2Key = "Keypad 2";
 
+    const std::string muteMusicKey = "M";
+
     bool moveLeft = false;
     bool moveRight = false;
     bool moveUp = false;

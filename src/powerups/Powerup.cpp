@@ -66,5 +66,7 @@ void Powerup::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
 
     applyEffect(player);
 
+    Mixer::getInstance()->playSound("powerup");
+
     queueDelete();
 }
