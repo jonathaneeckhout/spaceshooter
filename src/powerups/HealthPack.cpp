@@ -6,9 +6,9 @@ HealthPack::~HealthPack() {}
 
 void HealthPack::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-8, -8}, 16, 16);
+    auto body = Game::create<Square>(Vector{-8, -8}, Vector(16.0, 16.0));
 
-    body->color = {0xCE, 0x11, 0x27, 255};
+    body->setColor(0xCE, 0x11, 0x27, 255);
 
     addChild(body);
 }

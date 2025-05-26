@@ -11,12 +11,12 @@ void HealthBar::init()
 
 void HealthBar::createVisuals()
 {
-    backgroundBar = Game::create<Square>(Vector(), 128, 32);
-    backgroundBar->color = {0x36, 0x45, 0x4F, 0x88};
+    backgroundBar = Game::create<Square>(Vector(), Vector(128.0, 32.0));
+    backgroundBar->setColor(0x36, 0x45, 0x4F, 0x88);
     addChild(backgroundBar);
 
-    bar = Game::create<Square>(Vector(2.0, 2.0), 124, 28);
-    bar->color = {0x25, 0xff, 0x22, 0xFF};
+    bar = Game::create<Square>(Vector(2.0, 2.0), Vector(124.0, 28.0));
+    bar->setColor(0x25, 0xff, 0x22, 0xFF);
     addChild(bar);
 }
 
@@ -36,5 +36,5 @@ void HealthBar::setHealth(float value)
 
     health = value;
 
-    bar->width = width * (health / maxHealth);
+    bar->size.x = width * (health / maxHealth);
 }

@@ -156,20 +156,20 @@ void Player::handleKeyRelease(const std::string &key)
 
 void Player::createVisuals()
 {
-    auto wings = Game::create<Square>(Vector{-(64 / 2), -32 / 2}, 64, 32);
-    wings->color = {0x5D, 0x8A, 0xA8, 0xFF};
+    auto wings = Game::create<Square>(Vector{-(64 / 2), -32 / 2}, Vector(64.0, 32.0));
+    wings->setColor(0x5D, 0x8A, 0xA8, 0xFF);
     addChild(wings);
 
-    auto body = Game::create<Square>(Vector{-16 / 2, -48}, 16, 48);
-    body->color = {128, 128, 128, 255};
+    auto body = Game::create<Square>(Vector{-16 / 2, -48}, Vector(16.0, 48.0));
+    body->setColor(128, 128, 128, 255);
     addChild(body);
 
-    auto leftBlaster = Game::create<Square>(Vector{-32, -24}, 2, 8);
-    leftBlaster->color = {128, 128, 128, 255};
+    auto leftBlaster = Game::create<Square>(Vector{-32, -24}, Vector(2.0, 8.0));
+    leftBlaster->setColor(128, 128, 128, 255);
     addChild(leftBlaster);
 
-    auto rightBlaster = Game::create<Square>(Vector{32 - 2, -24}, 2, 8);
-    rightBlaster->color = {128, 128, 128, 255};
+    auto rightBlaster = Game::create<Square>(Vector{32 - 2, -24}, Vector(2.0, 8.0));
+    rightBlaster->setColor(128, 128, 128, 255);
     addChild(rightBlaster);
 }
 

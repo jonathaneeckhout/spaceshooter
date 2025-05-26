@@ -44,9 +44,9 @@ void Bullet::update(float dt)
 
 void Bullet::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-2, -2}, 4, 8);
+    auto body = Game::create<Square>(Vector{-2, -2}, Vector(4.0, 8.0));
 
-    body->color = {0xA0, 0xFC, 0x24, 255};
+    body->setColor(0xA0, 0xFC, 0x24, 255);
 
     addChild(body);
 }

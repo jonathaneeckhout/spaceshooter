@@ -44,9 +44,9 @@ void Zap::update(float dt)
 
 void Zap::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-2, -2}, 8, 8);
+    auto body = Game::create<Square>(Vector{-2, -2}, Vector(8.0, 8.0));
 
-    body->color = {0xAA, 0x22, 0xCC, 255};
+    body->setColor(0xAA, 0x22, 0xCC, 255);
 
     addChild(body);
 }

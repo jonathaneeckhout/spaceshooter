@@ -17,7 +17,7 @@ private:
     float health = 0.0;
     float maxHealth = 0.0;
 
-    int width = 124;
+    float width = 124.0;
 
     std::shared_ptr<Square> backgroundBar;
 

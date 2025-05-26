@@ -31,9 +31,9 @@ void Astroid::loadEntities()
 
 void Astroid::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-16, -16}, 32, 32);
+    auto body = Game::create<Square>(Vector{-16, -16}, Vector(32.0, 32.0));
 
-    body->color = {0x5A, 0x55, 0x4C, 255};
+    body->setColor(0x5A, 0x55, 0x4C, 255);
 
     addChild(body);
 }

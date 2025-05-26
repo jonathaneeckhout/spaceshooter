@@ -39,9 +39,9 @@ void Disc::loadEntities()
 
 void Disc::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-16, -16}, 32, 32);
+    auto body = Game::create<Square>(Vector{-16, -16}, Vector(32.0, 32.0));
 
-    body->color = {0x7A, 0xD0, 0xB2, 255};
+    body->setColor(0x7A, 0xD0, 0xB2, 255);
 
     addChild(body);
 }
