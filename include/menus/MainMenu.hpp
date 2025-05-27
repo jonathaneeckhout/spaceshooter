@@ -23,7 +23,11 @@ private:
     void registerInputs();
     void createVisuals();
 
-    void handleKeyPress(const std::string &key);
+    void handleKey(const std::string &key, bool pressed);
+    void handlePlay();
+    void handleSettings();
+    void handleQuit();
 
     void selectNextButton(int increment);
+    void pressSelectedButton();
 };

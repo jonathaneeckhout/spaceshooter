@@ -7,6 +7,7 @@
 #include "player/Player.hpp"
 
 #include "audio/music/background-drum-and-bass/background-drum-and-bass-117717.h"
+#include "audio/music/deep-space-atmosphere/deep-space-atmosphere-217294.h"
 #include "fonts/8x8-square-roguelike-ascii-font/8x8-square-roguelike-ascii-font.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/Weapons/Lazers/sfx_wpn_laser8.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/SimpleDamageSounds/sfx_damage_hit1.h"
@@ -33,6 +34,7 @@ static void loadResources()
     resources->loadResource("defaultFont", __8x8_square_roguelike_ascii_font, __8x8_square_roguelike_ascii_font_len);
 
     // Audio
+    resources->loadResource("backgroundDeepSpaceAtmosphere", deep_space_atmosphere_217294, deep_space_atmosphere_217294_len);
     resources->loadResource("backgroundDNB", background_drum_and_bass_117717, background_drum_and_bass_117717_len);
     resources->loadResource("bullet", sfx_wpn_laser8, sfx_wpn_laser8_len);
     resources->loadResource("bulletImpact", sfx_damage_hit1, sfx_damage_hit1_len);
@@ -48,6 +50,7 @@ static void loadSounds()
 {
     auto mixer = Mixer::getInstance();
 
+    mixer->loadSound("backgroundDeepSpaceAtmosphere", "backgroundDeepSpaceAtmosphere");
     mixer->loadSound("backgroundDNB", "backgroundDNB");
     mixer->loadSound("bullet", "bullet");
     mixer->loadSound("bulletImpact", "bulletImpact", 0.8);
@@ -72,16 +75,17 @@ static void registerKeyMappings()
 
     controls->registerKeys("MuteMusic", "M");
 
+    controls->registerKeys("Enter", "Return");
     controls->registerKeys("Quit", "Escape");
 }
 
 static void loadGame()
 {
-    // auto map = Game::create<AstroidField>();
-    // game->setRootObject(map);
+    auto map = Game::create<AstroidField>();
+    game->setRootObject(map);
 
-    auto mainMenu = Game::create<MainMenu>();
-    game->setRootObject(mainMenu);
+    // auto mainMenu = Game::create<MainMenu>();
+    // game->setRootObject(mainMenu);
 }
 
 int main()
