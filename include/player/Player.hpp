@@ -67,8 +67,7 @@ private:
     void loadEntities();
 
     void registerControls();
-    void handleKeyPress(const std::string &key);
-    void handleKeyRelease(const std::string &key);
+    void handleKey(const std::string &key, bool press);
 
     void createVisuals();
 

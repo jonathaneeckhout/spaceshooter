@@ -2,6 +2,7 @@
 #include <csignal>
 #include <jengine/jengine.hpp>
 
+#include "menus/MainMenu.hpp"
 #include "maps/AstroidField.hpp"
 #include "player/Player.hpp"
 
@@ -57,10 +58,30 @@ static void loadSounds()
     mixer->loadSound("PlayerDestroyedExplosion", "explosion1");
 }
 
+static void registerKeyMappings()
+{
+    auto controls = Controls::getInstance();
+
+    controls->registerKeys("MoveUp", "W");
+    controls->registerKeys("MoveDown", "S");
+    controls->registerKeys("MoveLeft", "A");
+    controls->registerKeys("MoveRight", "D");
+
+    controls->registerKeys("FireWeapon1", "Keypad 1");
+    controls->registerKeys("FireWeapon2", "Keypad 2");
+
+    controls->registerKeys("MuteMusic", "M");
+
+    controls->registerKeys("Quit", "Escape");
+}
+
 static void loadGame()
 {
-    auto map = Game::create<AstroidField>();
-    game->setRootObject(map);
+    // auto map = Game::create<AstroidField>();
+    // game->setRootObject(map);
+
+    auto mainMenu = Game::create<MainMenu>();
+    game->setRootObject(mainMenu);
 }
 
 int main()
@@ -74,6 +95,8 @@ int main()
     loadResources();
 
     loadSounds();
+
+    registerKeyMappings();
 
     loadGame();
 

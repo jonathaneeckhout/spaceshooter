@@ -80,40 +80,47 @@ void Player::registerControls()
     }
 
     controls->keyPressHandlers.push_back([this](const std::string &key)
-                                         { handleKeyPress(key); });
+                                         { handleKey(key, true); });
 
     controls->keyReleaseHandlers.push_back([this](const std::string &key)
-                                           { handleKeyRelease(key); });
+                                           { handleKey(key, false); });
 }
 
-void Player::handleKeyPress(const std::string &key)
+void Player::handleKey(const std::string &key, bool press)
 {
-    if (key == moveLeftKey)
+    auto controls = Controls::getInstance();
+
+    if (controls->isMapping("MoveLeft", key))
     {
-        moveLeft = true;
+        moveLeft = press;
     }
-    else if (key == moveRightKey)
+    else if (controls->isMapping("MoveRight", key))
     {
-        moveRight = true;
+        moveRight = press;
     }
-    else if (key == moveUpKey)
+    else if (controls->isMapping("MoveUp", key))
     {
-        moveUp = true;
+        moveUp = press;
     }
-    else if (key == moveDownKey)
+    else if (controls->isMapping("MoveDown", key))
     {
-        moveDown = true;
+        moveDown = press;
     }
-    else if (key == weapon1Key)
+    else if (controls->isMapping("FireWeapon1", key))
     {
-        shootWeapon1 = true;
+        shootWeapon1 = press;
     }
-    else if (key == weapon2Key)
+    else if (controls->isMapping("FireWeapon2", key))
     {
-        shootWeapon2 = true;
+        shootWeapon2 = press;
     }
-    else if (key == muteMusicKey)
+    else if (controls->isMapping("MuteMusic", key))
     {
+        if (!press)
+        {
+            return;
+        }
+
         auto mixer = Mixer::getInstance();
         if (mixer->isMuted())
         {
@@ -123,34 +130,6 @@ void Player::handleKeyPress(const std::string &key)
         {
             mixer->mute();
         }
-    }
-}
-
-void Player::handleKeyRelease(const std::string &key)
-{
-    if (key == moveLeftKey)
-    {
-        moveLeft = false;
-    }
-    else if (key == moveRightKey)
-    {
-        moveRight = false;
-    }
-    else if (key == moveUpKey)
-    {
-        moveUp = false;
-    }
-    else if (key == moveDownKey)
-    {
-        moveDown = false;
-    }
-    else if (key == weapon1Key)
-    {
-        shootWeapon1 = false;
-    }
-    else if (key == weapon2Key)
-    {
-        shootWeapon2 = false;
     }
 }
 
