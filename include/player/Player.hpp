@@ -16,6 +16,7 @@ public:
     ~Player();
 
     void init() override;
+    void cleanup() override;
 
     void update(float dt) override;
     void output() override;
@@ -64,9 +65,13 @@ private:
 
     std::shared_ptr<ScoreBar> scoreBar;
 
+    int keyHandlerID = 0;
+
     void loadEntities();
 
     void registerControls();
+    void deregisterInputs();
+
     void handleKey(const std::string &key, bool press);
 
     void createVisuals();

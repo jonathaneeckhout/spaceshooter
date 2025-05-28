@@ -20,6 +20,11 @@ void Player::init()
     createVisuals();
 }
 
+void Player::cleanup()
+{
+    deregisterInputs();
+}
+
 void Player::loadEntities()
 {
     collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
@@ -79,11 +84,19 @@ void Player::registerControls()
         return;
     }
 
-    controls->keyPressHandlers.push_back([this](const std::string &key)
-                                         { handleKey(key, true); });
+    keyHandlerID = controls->addKeyHandler([this](const std::string &key, bool pressed)
+                                           { handleKey(key, pressed); });
+}
 
-    controls->keyReleaseHandlers.push_back([this](const std::string &key)
-                                           { handleKey(key, false); });
+void Player::deregisterInputs()
+{
+    Controls *controls = Controls::getInstance();
+    if (controls == nullptr)
+    {
+        return;
+    }
+
+    controls->removeKeyHandler(keyHandlerID);
 }
 
 void Player::handleKey(const std::string &key, bool press)

@@ -16,6 +16,7 @@
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/Coins/sfx_coin_double1.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/Explosions/Short/sfx_exp_short_hard2.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/Explosions/MediumLength/sfx_exp_medium5.h"
+#include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/Buttons/sfx_sounds_button7.h"
 
 Game *game = NULL;
 
@@ -44,6 +45,7 @@ static void loadResources()
     resources->loadResource("powerup", sfx_coin_double1, sfx_coin_double1_len);
     resources->loadResource("explosion0", sfx_exp_short_hard2, sfx_exp_short_hard2_len);
     resources->loadResource("explosion1", sfx_exp_medium5, sfx_exp_medium5_len);
+    resources->loadResource("button0", sfx_sounds_button7, sfx_sounds_button7_len);
 }
 
 static void loadSounds()
@@ -59,6 +61,7 @@ static void loadSounds()
     mixer->loadSound("powerup", "powerup");
     mixer->loadSound("EnemyDestroyedExplosion", "explosion0", 0.7);
     mixer->loadSound("PlayerDestroyedExplosion", "explosion1");
+    mixer->loadSound("button0", "button0");
 }
 
 static void registerKeyMappings()
@@ -81,11 +84,11 @@ static void registerKeyMappings()
 
 static void loadGame()
 {
-    auto map = Game::create<AstroidField>();
-    game->setRootObject(map);
+    // auto map = Game::create<AstroidField>();
+    // game->setRootObject(map);
 
-    // auto mainMenu = Game::create<MainMenu>();
-    // game->setRootObject(mainMenu);
+    auto mainMenu = Game::create<MainMenu>();
+    game->setRootObject(mainMenu);
 }
 
 int main()

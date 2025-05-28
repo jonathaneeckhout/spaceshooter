@@ -11,6 +11,7 @@ public:
     ~MainMenu();
 
     void init() override;
+    void cleanup() override;
 
 private:
     std::shared_ptr<Square> buttonPanel;
@@ -19,8 +20,10 @@ private:
     std::shared_ptr<Button> quitButton;
 
     int buttonOffset = 0;
+    int keyHandlerID = 0;
 
     void registerInputs();
+    void deregisterInputs();
     void createVisuals();
 
     void handleKey(const std::string &key, bool pressed);
@@ -28,6 +31,6 @@ private:
     void handleSettings();
     void handleQuit();
 
-    void selectNextButton(int increment);
+    void selectNextButton(int increment, bool playSound);
     void pressSelectedButton();
 };

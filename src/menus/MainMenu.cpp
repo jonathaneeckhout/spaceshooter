@@ -3,7 +3,6 @@
 #include "menus/MainMenu.hpp"
 #include "maps/AstroidField.hpp"
 
-
 MainMenu::MainMenu() {}
 
 MainMenu::~MainMenu() {}
@@ -14,9 +13,18 @@ void MainMenu::init()
 
     createVisuals();
 
-    selectNextButton(0);
+    selectNextButton(0, false);
 
     Mixer::getInstance()->playSound("backgroundDeepSpaceAtmosphere");
+}
+
+void MainMenu::cleanup()
+{
+    deregisterInputs();
+
+    // Mixer::getInstance()->stopAllSounds();
+
+    Mixer::getInstance()->stopSound("backgroundDeepSpaceAtmosphere");
 }
 
 void MainMenu::registerInputs()
@@ -27,11 +35,19 @@ void MainMenu::registerInputs()
         return;
     }
 
-    controls->keyPressHandlers.push_back([this](const std::string &key)
-                                         { handleKey(key, true); });
+    keyHandlerID = controls->addKeyHandler([this](const std::string &key, bool pressed)
+                                           { handleKey(key, pressed); });
+}
 
-    controls->keyReleaseHandlers.push_back([this](const std::string &key)
-                                           { handleKey(key, false); });
+void MainMenu::deregisterInputs()
+{
+    Controls *controls = Controls::getInstance();
+    if (controls == nullptr)
+    {
+        return;
+    }
+
+    controls->removeKeyHandler(keyHandlerID);
 }
 
 void MainMenu::handleKey(const std::string &key, bool pressed)
@@ -44,11 +60,11 @@ void MainMenu::handleKey(const std::string &key, bool pressed)
     }
     else if (pressed && controls->isMapping("MoveUp", key))
     {
-        selectNextButton(-1);
+        selectNextButton(-1, true);
     }
     else if (pressed && controls->isMapping("MoveDown", key))
     {
-        selectNextButton(1);
+        selectNextButton(1, true);
     }
     else if (controls->isMapping("Enter", key))
     {
@@ -58,7 +74,7 @@ void MainMenu::handleKey(const std::string &key, bool pressed)
         }
         else
         {
-            selectNextButton(0);
+            selectNextButton(0, false);
         }
     }
 }
@@ -94,7 +110,7 @@ void MainMenu::createVisuals()
     buttonPanel->addChild(quitButton);
 }
 
-void MainMenu::selectNextButton(int increment)
+void MainMenu::selectNextButton(int increment, bool playSound)
 {
     auto prevButton = Game::safeCast<Button>(buttonPanel->getChild(buttonOffset));
     if (prevButton)
@@ -110,6 +126,11 @@ void MainMenu::selectNextButton(int increment)
     if (nextButton)
     {
         nextButton->setSelected();
+    }
+
+    if (playSound && prevButton != nextButton)
+    {
+        Mixer::getInstance()->playSound("button0");
     }
 }
 

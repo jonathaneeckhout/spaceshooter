@@ -34,6 +34,11 @@ void Map::init()
     playBackgroundSound();
 }
 
+void Map::cleanup()
+{
+    deregisterInputs();
+}
+
 void Map::loadEntities()
 {
     entities = Game::create<Entity>();
@@ -85,11 +90,26 @@ void Map::registerInputs()
         return;
     }
 
-    controls->keyPressHandlers.push_back([this](std::string key)
-                                         { 
-        if(key == "Escape") {
+    quitCallbackID = controls->addKeyHandler([this](std::string key, bool pressed)
+                                             {
+        if (!pressed) {
+            return;
+        }
+
+        if(Controls::getInstance()->isMapping("Quit", key)) {
             game->stop();
         } });
+}
+
+void Map::deregisterInputs()
+{
+    Controls *controls = Controls::getInstance();
+    if (controls == nullptr)
+    {
+        return;
+    }
+
+    controls->removeKeyHandler(quitCallbackID);
 }
 
 bool Map::addProjectile(std::shared_ptr<Entity> projectile)

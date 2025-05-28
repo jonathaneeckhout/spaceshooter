@@ -20,6 +20,7 @@ public:
     ~Map();
 
     void init() override;
+    void cleanup() override;
 
     void update(float dt) override;
 
@@ -39,8 +40,11 @@ protected:
     std::shared_ptr<Timer> queueTimer;
     std::queue<QueuedEntity *> entityQueue;
 
+    int quitCallbackID = 0;
+
     void loadEntities();
     void registerInputs();
+    void deregisterInputs();
 
     virtual void loadEnityQueue();
     virtual void playBackgroundSound();
