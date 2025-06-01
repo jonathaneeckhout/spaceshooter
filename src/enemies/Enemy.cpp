@@ -24,28 +24,31 @@ void Enemy::hurt(float amount)
     }
 }
 
-std::shared_ptr<Map> Enemy::getMap()
+Map *Enemy::getMap()
 {
-    auto entity = Game::safeCast<Entity>(parent);
+    auto entity = dynamic_cast<Entity *>(parent);
     if (!entity)
     {
         return nullptr;
     }
 
-    return Game::safeCast<Map>(entity->getParent());
+    return dynamic_cast<Map *>(entity->getParent());
 }
 
-std::shared_ptr<Player> Enemy::getPlayer()
+Player *Enemy::getPlayer()
 {
-    auto entity = Game::safeCast<Entity>(parent);
+    auto entity = dynamic_cast<Entity *>(parent);
     if (!entity)
     {
         return nullptr;
     }
 
-    auto map = Game::safeCast<Map>(entity->getParent());
+    auto map = dynamic_cast<Map *>(entity->getParent());
+    if (!map) {
+        return nullptr;
+    }
 
-    return Game::safeCast<Player>(map->getPlayer());
+    return map->getPlayer();
 }
 
 void Enemy::giveScore()

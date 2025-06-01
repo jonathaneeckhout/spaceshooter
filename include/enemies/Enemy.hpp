@@ -18,8 +18,8 @@ public:
     void hurt(float amount);
 
 protected:
-    std::shared_ptr<Map> getMap();
-    std::shared_ptr<Player> getPlayer();
+    Map *getMap();
+    Player *getPlayer();
 
     bool deleteOffscreen();
 

@@ -18,16 +18,16 @@ protected:
 
     float destroyTime = 4.0;
 
-    std::shared_ptr<Timer> destroyTimer = nullptr;
+    Timer *destroyTimer = nullptr;
 
     virtual void loadEntities();
 
     virtual void createVisuals();
 
-    virtual void applyEffect(std::shared_ptr<Player> player);
+    virtual void applyEffect(Player *player);
 
 private:
     void destroyCallback();
 
-    void handleCollisiontStarted(std::weak_ptr<CollisionShape> shape);
+    void handleCollisiontStarted(CollisionShape *shape);
 };

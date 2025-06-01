@@ -3,28 +3,17 @@
 #include "enemies/Astroid.hpp"
 #include "enemies/Disc.hpp"
 
-Map::Map()
+Map::Map() {}
+
+Map::~Map() {}
+
+void Map::init()
 {
     game = Game::getInstance();
     if (game == nullptr)
     {
         return;
     }
-}
-
-Map::~Map()
-{
-    while (!entityQueue.empty())
-    {
-        QueuedEntity *queuedEntity = entityQueue.front();
-        entityQueue.pop();
-
-        delete queuedEntity;
-    }
-}
-
-void Map::init()
-{
     loadEntities();
 
     registerInputs();
@@ -36,7 +25,21 @@ void Map::init()
 
 void Map::cleanup()
 {
+
     deregisterInputs();
+
+    while (!entityQueue.empty())
+    {
+        QueuedEntity *queuedEntity = entityQueue.front();
+        entityQueue.pop();
+
+        for (auto entity : queuedEntity->entities)
+        {
+            delete entity;
+        }
+
+        delete queuedEntity;
+    }
 }
 
 void Map::loadEntities()
@@ -112,25 +115,21 @@ void Map::deregisterInputs()
     controls->removeKeyHandler(quitCallbackID);
 }
 
-bool Map::addProjectile(std::shared_ptr<Entity> projectile)
+bool Map::addProjectile(Entity *projectile)
 {
     return projectiles->addChild(projectile);
 }
 
-bool Map::addPowerup(std::shared_ptr<Entity> projectile)
+bool Map::addPowerup(Entity *projectile)
 {
     return powerups->addChild(projectile);
 }
 
-void Map::loadEnityQueue() {}
-
-void Map::playBackgroundSound() {}
-
-void Map::pushEntityToQueue(float loadTime, std::vector<std::shared_ptr<Entity>> entity)
+void Map::pushEntityToQueue(float loadTime, std::vector<Entity *> entities)
 {
     QueuedEntity *queuedEntity = new QueuedEntity();
     queuedEntity->loadTime = loadTime;
-    queuedEntity->entities = entity;
+    queuedEntity->entities = entities;
     entityQueue.push(queuedEntity);
 }
 
@@ -147,7 +146,7 @@ void Map::queueTimerCallback()
     delete queuedEntity;
 }
 
-std::weak_ptr<Player> Map::getPlayer()
+Player *Map::getPlayer()
 {
     return player;
 }

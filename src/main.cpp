@@ -86,8 +86,8 @@ static void loadGame()
 {
     // auto map = Game::create<AstroidField>();
     // game->setRootObject(map);
-
-    auto mainMenu = Game::create<MainMenu>();
+ 
+    auto mainMenu =Game::create<MainMenu>();
     game->setRootObject(mainMenu);
 }
 

@@ -16,6 +16,7 @@ Disc::~Disc() {};
 
 void Disc::init()
 {
+
     loadEntities();
 
     createVisuals();
@@ -104,11 +105,6 @@ void Disc::updateMovement(float dt)
 void Disc::updateShooting(float)
 {
     if (weaponTimer->isRunning())
-    {
-        return;
-    }
-
-    if (!parent.lock())
     {
         return;
     }

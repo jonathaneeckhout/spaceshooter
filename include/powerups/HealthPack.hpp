@@ -8,7 +8,7 @@ public:
     HealthPack(Vector position);
     ~HealthPack();
 
-    void applyEffect(std::shared_ptr<Player> player) override;
+    void applyEffect(Player *player) override;
 
 protected:
     void createVisuals() override;

@@ -22,8 +22,6 @@ void MainMenu::cleanup()
 {
     deregisterInputs();
 
-    // Mixer::getInstance()->stopAllSounds();
-
     Mixer::getInstance()->stopSound("backgroundDeepSpaceAtmosphere");
 }
 
@@ -112,7 +110,7 @@ void MainMenu::createVisuals()
 
 void MainMenu::selectNextButton(int increment, bool playSound)
 {
-    auto prevButton = Game::safeCast<Button>(buttonPanel->getChild(buttonOffset));
+    auto prevButton = dynamic_cast<Button *>(buttonPanel->getChild(buttonOffset));
     if (prevButton)
     {
         prevButton->setIdle();
@@ -122,7 +120,7 @@ void MainMenu::selectNextButton(int increment, bool playSound)
 
     buttonOffset = std::clamp<int>(buttonOffset, 0, buttonPanel->getChildrenSize() - 1);
 
-    auto nextButton = Game::safeCast<Button>(buttonPanel->getChild(buttonOffset));
+    auto nextButton = dynamic_cast<Button *>(buttonPanel->getChild(buttonOffset));
     if (nextButton)
     {
         nextButton->setSelected();
@@ -136,7 +134,7 @@ void MainMenu::selectNextButton(int increment, bool playSound)
 
 void MainMenu::pressSelectedButton()
 {
-    auto selectedButton = Game::safeCast<Button>(buttonPanel->getChild(buttonOffset));
+    auto selectedButton = dynamic_cast<Button *>(buttonPanel->getChild(buttonOffset));
     if (selectedButton)
     {
         selectedButton->setPressed();

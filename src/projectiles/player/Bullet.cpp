@@ -26,7 +26,7 @@ void Bullet::init()
     collisionShape->inLayer = Config::NoCollisionLayer;
     collisionShape->viewLayer = Config::EnemyCollisionLayer;
 
-    collisionShape->collisionStartHandlers.push_back([this](std::weak_ptr<CollisionShape> shape)
+    collisionShape->collisionStartHandlers.push_back([this](CollisionShape *shape)
                                                      { handleCollisiontStarted(shape); });
 
     addChild(collisionShape);
@@ -56,15 +56,10 @@ void Bullet::destroyCallback()
     queueDelete();
 }
 
-void Bullet::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
+void Bullet::handleCollisiontStarted(CollisionShape *shape)
 {
-    auto shapePtr = shape.lock();
-    if (!shapePtr)
-    {
-        return;
-    }
 
-    auto enemy = Game::safeCast<Enemy>(shapePtr->getParent());
+    auto enemy = dynamic_cast<Enemy *>(shape->getParent());
     if (enemy == nullptr)
     {
         return;

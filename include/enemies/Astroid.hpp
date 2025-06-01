@@ -11,6 +11,7 @@ public:
     ~Astroid();
 
     void init() override;
+    void cleanup() override;
 
     void update(float dt) override;
 

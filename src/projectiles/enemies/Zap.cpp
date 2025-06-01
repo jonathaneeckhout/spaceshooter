@@ -26,7 +26,7 @@ void Zap::init()
     collisionShape->inLayer = Config::NoCollisionLayer;
     collisionShape->viewLayer = Config::PlayerCollisionLayer;
 
-    collisionShape->collisionStartHandlers.push_back([this](std::weak_ptr<CollisionShape> shape)
+    collisionShape->collisionStartHandlers.push_back([this](CollisionShape *shape)
                                                      { handleCollisiontStarted(shape); });
 
     addChild(collisionShape);
@@ -56,15 +56,10 @@ void Zap::destroyCallback()
     queueDelete();
 }
 
-void Zap::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
+void Zap::handleCollisiontStarted(CollisionShape *shape)
 {
-    auto shapePtr = shape.lock();
-    if (!shapePtr)
-    {
-        return;
-    }
 
-    auto player = Game::safeCast<Player>(shapePtr->getParent());
+    auto player = dynamic_cast<Player *>(shape->getParent());
     if (player == nullptr)
     {
         return;

@@ -9,6 +9,7 @@ public:
     ~HealthBar();
 
     void init() override;
+
     void output() override;
 
     void setHealth(float value);
@@ -19,9 +20,9 @@ private:
 
     float width = 124.0;
 
-    std::shared_ptr<Square> backgroundBar;
+    Square *backgroundBar = nullptr;
 
-    std::shared_ptr<Square> bar;
+    Square *bar = nullptr;
 
     void createVisuals();
 };

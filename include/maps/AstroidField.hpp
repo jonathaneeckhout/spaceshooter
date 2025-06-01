@@ -15,4 +15,5 @@ public:
 protected:
     void loadEnityQueue() override;
     void playBackgroundSound() override;
+    void stopBackgroundSound() override;
 };

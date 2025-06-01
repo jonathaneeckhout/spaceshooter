@@ -10,7 +10,7 @@ class QueuedEntity
 {
 public:
     float loadTime = 0;
-    std::vector<std::shared_ptr<Entity>> entities;
+    std::vector<Entity *> entities;
 };
 
 class Map : public Object
@@ -24,20 +24,20 @@ public:
 
     void update(float dt) override;
 
-    bool addProjectile(std::shared_ptr<Entity> projectile);
-    bool addPowerup(std::shared_ptr<Entity> powerup);
+    bool addProjectile(Entity *projectile);
+    bool addPowerup(Entity *powerup);
 
-    std::weak_ptr<Player> getPlayer();
+    Player *getPlayer();
 
 protected:
     Game *game = nullptr;
-    std::shared_ptr<Player> player;
+    Player *player = nullptr;
 
-    std::shared_ptr<Entity> entities;
-    std::shared_ptr<Entity> projectiles;
-    std::shared_ptr<Entity> powerups;
+    Entity *entities = nullptr;
+    Entity *projectiles = nullptr;
+    Entity *powerups = nullptr;
 
-    std::shared_ptr<Timer> queueTimer;
+    Timer *queueTimer = nullptr;
     std::queue<QueuedEntity *> entityQueue;
 
     int quitCallbackID = 0;
@@ -46,9 +46,10 @@ protected:
     void registerInputs();
     void deregisterInputs();
 
-    virtual void loadEnityQueue();
-    virtual void playBackgroundSound();
+    virtual void loadEnityQueue() {};
+    virtual void playBackgroundSound() {};
+    virtual void stopBackgroundSound() {};
 
-    void pushEntityToQueue(float loadTime, std::vector<std::shared_ptr<Entity>> entity);
+    void pushEntityToQueue(float loadTime, std::vector<Entity *> entities);
     void queueTimerCallback();
 };

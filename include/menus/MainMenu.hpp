@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <vector>
 #include <jengine/jengine.hpp>
 
@@ -14,10 +13,10 @@ public:
     void cleanup() override;
 
 private:
-    std::shared_ptr<Square> buttonPanel;
-    std::shared_ptr<Button> playButton;
-    std::shared_ptr<Button> settingsButton;
-    std::shared_ptr<Button> quitButton;
+    Square *buttonPanel = nullptr;
+    Button *playButton = nullptr;
+    Button *settingsButton = nullptr;
+    Button *quitButton = nullptr;
 
     int buttonOffset = 0;
     int keyHandlerID = 0;

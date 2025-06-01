@@ -49,21 +49,21 @@ private:
     bool shootWeapon1 = false;
     bool shootWeapon2 = false;
 
-    std::shared_ptr<Entity> weapon1Muzzle;
+    Entity *weapon1Muzzle = nullptr;
 
     float weapon1Delay = 0.2;
 
-    std::shared_ptr<Timer> weapon1Timer;
+    Timer *weapon1Timer = nullptr;
 
-    std::shared_ptr<Object> UI;
+    Object *UI = nullptr;
 
-    std::shared_ptr<CollisionShapeSquare> hurtBox;
+    CollisionShapeSquare *hurtBox = nullptr;
 
-    std::shared_ptr<CollisionShapeSquare> lootBox;
+    CollisionShapeSquare *lootBox = nullptr;
 
-    std::shared_ptr<HealthBar> healthBar;
+    HealthBar *healthBar = nullptr;
 
-    std::shared_ptr<ScoreBar> scoreBar;
+    ScoreBar *scoreBar = nullptr;
 
     int keyHandlerID = 0;
 

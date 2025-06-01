@@ -18,12 +18,12 @@ public:
 private:
     float destroyTime = 2.0;
 
-    std::shared_ptr<Timer> destroyTimer = nullptr;
+    Timer *destroyTimer = nullptr;
 
     void createVisuals();
 
     void destroyCallback();
 
-    void handleCollisiontStarted(std::weak_ptr<CollisionShape> shape);
-    void handleCollisiontEnded(std::weak_ptr<CollisionShape> shape);
+    void handleCollisiontStarted(CollisionShape *shape);
+    void handleCollisiontEnded(CollisionShape *shape);
 };

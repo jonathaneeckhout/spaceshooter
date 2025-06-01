@@ -5,17 +5,17 @@ Powerup::Powerup(Vector position) : Entity(position, Vector(0, 1)) {}
 
 Powerup::~Powerup() {}
 
+void Powerup::init()
+{
+    loadEntities();
+    createVisuals();
+}
+
 void Powerup::update(float dt)
 {
     Vector newPosition = getPosition() + velocity * speed * dt;
 
     setPosition(newPosition);
-}
-
-void Powerup::init()
-{
-    loadEntities();
-    createVisuals();
 }
 
 void Powerup::loadEntities()
@@ -35,7 +35,7 @@ void Powerup::loadEntities()
     collisionShape->inLayer = Config::NoCollisionLayer;
     collisionShape->viewLayer = Config::PowerupCollisionLayer;
 
-    collisionShape->collisionStartHandlers.push_back([this](std::weak_ptr<CollisionShape> shape)
+    collisionShape->collisionStartHandlers.push_back([this](CollisionShape *shape)
                                                      { handleCollisiontStarted(shape); });
 
     addChild(collisionShape);
@@ -43,22 +43,21 @@ void Powerup::loadEntities()
 
 void Powerup::createVisuals() {}
 
-void Powerup::applyEffect(std::shared_ptr<Player>) {}
+void Powerup::applyEffect(Player *) {}
 
 void Powerup::destroyCallback()
 {
     queueDelete();
 }
 
-void Powerup::handleCollisiontStarted(std::weak_ptr<CollisionShape> shape)
+void Powerup::handleCollisiontStarted(CollisionShape *shape)
 {
-    auto shapePtr = shape.lock();
-    if (!shapePtr)
+    if (shape == nullptr)
     {
         return;
     }
 
-    auto player = Game::safeCast<Player>(shapePtr->getParent());
+    auto player = dynamic_cast<Player *>(shape->getParent());
     if (player == nullptr)
     {
         return;

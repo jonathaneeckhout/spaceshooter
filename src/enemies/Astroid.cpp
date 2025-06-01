@@ -18,6 +18,8 @@ void Astroid::init()
     createVisuals();
 }
 
+void Astroid::cleanup() {}
+
 void Astroid::loadEntities()
 {
     collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));

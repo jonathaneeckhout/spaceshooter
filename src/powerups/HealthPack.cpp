@@ -13,7 +13,7 @@ void HealthPack::createVisuals()
     addChild(body);
 }
 
-void HealthPack::applyEffect(std::shared_ptr<Player> player)
+void HealthPack::applyEffect(Player* player)
 {
     player->heal(healing);
 }

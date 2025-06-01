@@ -19,7 +19,7 @@ private:
     bool movingDown = false;
     float remainingDropDistance = 0.0f;
 
-    std::shared_ptr<Timer> weaponTimer;
+    Timer* weaponTimer = nullptr;
 
     void loadEntities();
     void createVisuals();

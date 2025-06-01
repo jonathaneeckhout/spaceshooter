@@ -15,7 +15,7 @@ public:
 private:
     unsigned int score = 0;
 
-    std::shared_ptr<Text> scoreText;
+    Text *scoreText = nullptr;
 
     void createVisuals();
 };
