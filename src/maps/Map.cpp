@@ -56,7 +56,9 @@ void Map::loadEntities()
     powerups->setName("Powerups");
     entities->addChild(powerups);
 
-    player = Game::create<Player>(Vector(400.0, 520.0));
+    Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+    player = Game::create<Player>(Vector(windowSize.x / 2, windowSize.y - 80));
     player->setName("Player");
     player->map = this;
     entities->addChild(player);

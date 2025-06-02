@@ -65,12 +65,14 @@ void Player::loadEntities()
     UI->setName("UI");
     addChild(UI);
 
-    healthBar = Game::create<HealthBar>(Vector(800 - 132, 600 - 48.0), health, maxHealth);
+    Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+    healthBar = Game::create<HealthBar>(Vector(windowSize.x - 132, windowSize.y - 48.0), health, maxHealth);
     healthBar->setName("HealthBar");
 
     UI->addChild(healthBar);
 
-    scoreBar = Game::create<ScoreBar>(Vector(16.0, 600 - 48.0));
+    scoreBar = Game::create<ScoreBar>(Vector(16.0, windowSize.y - 48.0));
     scoreBar->setName("ScoreBar");
 
     UI->addChild(scoreBar);
@@ -79,7 +81,7 @@ void Player::loadEntities()
 void Player::registerControls()
 {
     keyHandlerID = Game::getInstance()->controls->addKeyHandler([this](const std::string &key, bool pressed)
-                                           { handleKey(key, pressed); });
+                                                                { handleKey(key, pressed); });
 }
 
 void Player::deregisterInputs()
@@ -216,12 +218,12 @@ void Player::output() {}
 
 void Player::clampPosition()
 {
-    Renderer *renderer = Game::getInstance()->renderer;
-
     Vector pos = getPosition();
 
-    pos.x = std::clamp<float>(pos.x, 0.0, renderer->windowSize.x);
-    pos.y = std::clamp<float>(pos.y, 0.0, renderer->windowSize.y);
+    Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+    pos.x = std::clamp<float>(pos.x, 0.0, windowSize.x);
+    pos.y = std::clamp<float>(pos.y, 0.0, windowSize.y);
 
     setPosition(pos);
 }

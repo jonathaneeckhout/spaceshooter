@@ -67,11 +67,13 @@ void MainMenu::handleKey(const std::string &key, bool pressed)
 
 void MainMenu::createVisuals()
 {
-    title = Game::create<Text>(Vector(400, 100), "Spaceshooter", 64, "defaultFont");
+    Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+    title = Game::create<Text>(Vector(windowSize.x / 2, 100), "Spaceshooter", 64, "defaultFont");
     title->centered = true;
     addChild(title);
 
-    buttonPanel = Game::create<Square>(Vector(250, 200), Vector(300, 256));
+    buttonPanel = Game::create<Square>(Vector(windowSize.x / 2 - 150, 200), Vector(300, 256));
     buttonPanel->setColor(255, 0, 0, 255);
     addChild(buttonPanel);
 
