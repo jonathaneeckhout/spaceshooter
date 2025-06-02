@@ -78,30 +78,18 @@ void Player::loadEntities()
 
 void Player::registerControls()
 {
-    Controls *controls = Controls::getInstance();
-    if (controls == nullptr)
-    {
-        return;
-    }
-
-    keyHandlerID = controls->addKeyHandler([this](const std::string &key, bool pressed)
+    keyHandlerID = Game::getInstance()->controls->addKeyHandler([this](const std::string &key, bool pressed)
                                            { handleKey(key, pressed); });
 }
 
 void Player::deregisterInputs()
 {
-    Controls *controls = Controls::getInstance();
-    if (controls == nullptr)
-    {
-        return;
-    }
-
-    controls->removeKeyHandler(keyHandlerID);
+    Game::getInstance()->controls->removeKeyHandler(keyHandlerID);
 }
 
 void Player::handleKey(const std::string &key, bool press)
 {
-    auto controls = Controls::getInstance();
+    auto controls = Game::getInstance()->controls;
 
     if (controls->isMapping("MoveLeft", key))
     {
@@ -134,7 +122,7 @@ void Player::handleKey(const std::string &key, bool press)
             return;
         }
 
-        auto mixer = Mixer::getInstance();
+        auto mixer = Game::getInstance()->mixer;
         if (mixer->isMuted())
         {
             mixer->unMute();
@@ -228,7 +216,7 @@ void Player::output() {}
 
 void Player::clampPosition()
 {
-    Renderer *renderer = Renderer::getInstance();
+    Renderer *renderer = Game::getInstance()->renderer;
 
     Vector pos = getPosition();
 
@@ -244,7 +232,7 @@ void Player::hurt(float amount)
 
     if (health <= 0.0)
     {
-        Mixer::getInstance()->playSound("PlayerDestroyedExplosion");
+        Game::getInstance()->mixer->playSound("PlayerDestroyedExplosion");
 
         queueDelete();
     }

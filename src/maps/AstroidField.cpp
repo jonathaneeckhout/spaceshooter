@@ -27,10 +27,10 @@ void AstroidField::loadEnityQueue()
 
 void AstroidField::playBackgroundSound()
 {
-    Mixer::getInstance()->playSound("backgroundDNB");
+    Game::getInstance()->mixer->playSound("backgroundDNB");
 }
 
 void AstroidField::stopBackgroundSound()
 {
-    Mixer::getInstance()->stopSound("backgroundDNB");
+    Game::getInstance()->mixer->stopSound("backgroundDNB");
 }

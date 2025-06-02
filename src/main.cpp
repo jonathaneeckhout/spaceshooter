@@ -29,7 +29,7 @@ static void signalHandler(int signum)
 
 static void loadResources()
 {
-    Resources *resources = Resources::getInstance();
+    Resources *resources = Game::getInstance()->resources;
 
     // Fonts
     resources->loadResource("defaultFont", __8x8_square_roguelike_ascii_font, __8x8_square_roguelike_ascii_font_len);
@@ -50,7 +50,7 @@ static void loadResources()
 
 static void loadSounds()
 {
-    auto mixer = Mixer::getInstance();
+    auto mixer = Game::getInstance()->mixer;
 
     mixer->loadSound("backgroundDeepSpaceAtmosphere", "backgroundDeepSpaceAtmosphere");
     mixer->loadSound("backgroundDNB", "backgroundDNB");
@@ -66,7 +66,7 @@ static void loadSounds()
 
 static void registerKeyMappings()
 {
-    auto controls = Controls::getInstance();
+    auto controls = Game::getInstance()->controls;
 
     controls->registerKeys("MoveUp", "W");
     controls->registerKeys("MoveDown", "S");
@@ -107,9 +107,7 @@ int main()
 
     loadGame();
 
-    Renderer *renderer = Renderer::getInstance();
-
-    renderer->setWindowTitle("SpaceShooter");
+    game->renderer->setWindowTitle("SpaceShooter");
 
     game->run();
 

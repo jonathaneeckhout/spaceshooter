@@ -33,7 +33,7 @@ void Zap::init()
 
     createVisuals();
 
-    Mixer::getInstance()->playSound("zap");
+    Game::getInstance()->mixer->playSound("zap");
 }
 
 void Zap::update(float dt)
@@ -67,7 +67,7 @@ void Zap::handleCollisiontStarted(CollisionShape *shape)
 
     player->hurt(damage);
 
-    Mixer::getInstance()->playSound("ZapImpact");
+    Game::getInstance()->mixer->playSound("ZapImpact");
 
     queueDelete();
 }

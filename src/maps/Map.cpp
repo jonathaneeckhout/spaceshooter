@@ -87,32 +87,20 @@ void Map::update(float)
 
 void Map::registerInputs()
 {
-    Controls *controls = Controls::getInstance();
-    if (controls == nullptr)
-    {
-        return;
-    }
-
-    quitCallbackID = controls->addKeyHandler([this](std::string key, bool pressed)
-                                             {
+    quitCallbackID = Game::getInstance()->controls->addKeyHandler([this](std::string key, bool pressed)
+                                                                  {
         if (!pressed) {
             return;
         }
 
-        if(Controls::getInstance()->isMapping("Quit", key)) {
+        if(Game::getInstance()->controls->isMapping("Quit", key)) {
             game->stop();
         } });
 }
 
 void Map::deregisterInputs()
 {
-    Controls *controls = Controls::getInstance();
-    if (controls == nullptr)
-    {
-        return;
-    }
-
-    controls->removeKeyHandler(quitCallbackID);
+    Game::getInstance()->controls->removeKeyHandler(quitCallbackID);
 }
 
 bool Map::addProjectile(Entity *projectile)

@@ -15,42 +15,30 @@ void MainMenu::init()
 
     selectNextButton(0, false);
 
-    Mixer::getInstance()->playSound("backgroundDeepSpaceAtmosphere");
+    Game::getInstance()->mixer->playSound("backgroundDeepSpaceAtmosphere");
 }
 
 void MainMenu::cleanup()
 {
     deregisterInputs();
 
-    Mixer::getInstance()->stopSound("backgroundDeepSpaceAtmosphere");
+    Game::getInstance()->mixer->stopSound("backgroundDeepSpaceAtmosphere");
 }
 
 void MainMenu::registerInputs()
 {
-    Controls *controls = Controls::getInstance();
-    if (controls == nullptr)
-    {
-        return;
-    }
-
-    keyHandlerID = controls->addKeyHandler([this](const std::string &key, bool pressed)
-                                           { handleKey(key, pressed); });
+    keyHandlerID = Game::getInstance()->controls->addKeyHandler([this](const std::string &key, bool pressed)
+                                                                { handleKey(key, pressed); });
 }
 
 void MainMenu::deregisterInputs()
 {
-    Controls *controls = Controls::getInstance();
-    if (controls == nullptr)
-    {
-        return;
-    }
-
-    controls->removeKeyHandler(keyHandlerID);
+    Game::getInstance()->controls->removeKeyHandler(keyHandlerID);
 }
 
 void MainMenu::handleKey(const std::string &key, bool pressed)
 {
-    auto controls = Controls::getInstance();
+    auto controls = Game::getInstance()->controls;
 
     if (pressed && controls->isMapping("Quit", key))
     {
@@ -132,7 +120,7 @@ void MainMenu::selectNextButton(int increment, bool playSound)
 
     if (playSound && prevButton != nextButton)
     {
-        Mixer::getInstance()->playSound("button0");
+        Game::getInstance()->mixer->playSound("button0");
     }
 }
 

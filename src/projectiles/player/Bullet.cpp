@@ -33,7 +33,7 @@ void Bullet::init()
 
     createVisuals();
 
-    Mixer::getInstance()->playSound("bullet");
+    Game::getInstance()->mixer->playSound("bullet");
 }
 
 void Bullet::update(float dt)
@@ -67,7 +67,7 @@ void Bullet::handleCollisiontStarted(CollisionShape *shape)
 
     enemy->hurt(damage);
 
-    Mixer::getInstance()->playSound("bulletImpact");
+    Game::getInstance()->mixer->playSound("bulletImpact");
 
     queueDelete();
 }

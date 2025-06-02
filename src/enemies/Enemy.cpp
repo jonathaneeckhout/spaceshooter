@@ -18,7 +18,7 @@ void Enemy::hurt(float amount)
 
         dropLoot();
 
-        Mixer::getInstance()->playSound("EnemyDestroyedExplosion");
+        Game::getInstance()->mixer->playSound("EnemyDestroyedExplosion");
 
         queueDelete();
     }

@@ -65,7 +65,7 @@ void Powerup::handleCollisiontStarted(CollisionShape *shape)
 
     applyEffect(player);
 
-    Mixer::getInstance()->playSound("powerup");
+    Game::getInstance()->mixer->playSound("powerup");
 
     queueDelete();
 }
