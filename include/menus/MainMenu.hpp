@@ -13,10 +13,13 @@ public:
     void cleanup() override;
 
 private:
+    Text *title = nullptr;
+
     Square *buttonPanel = nullptr;
-    Button *playButton = nullptr;
-    Button *settingsButton = nullptr;
-    Button *quitButton = nullptr;
+
+    TextButton *playButton = nullptr;
+    TextButton *settingsButton = nullptr;
+    TextButton *quitButton = nullptr;
 
     int buttonOffset = 0;
     int keyHandlerID = 0;

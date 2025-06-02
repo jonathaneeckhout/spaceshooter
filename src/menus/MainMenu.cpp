@@ -79,11 +79,15 @@ void MainMenu::handleKey(const std::string &key, bool pressed)
 
 void MainMenu::createVisuals()
 {
+    title = Game::create<Text>(Vector(400, 100), "Spaceshooter", 64, "defaultFont");
+    title->centered = true;
+    addChild(title);
+
     buttonPanel = Game::create<Square>(Vector(250, 200), Vector(300, 256));
     buttonPanel->setColor(255, 0, 0, 255);
     addChild(buttonPanel);
 
-    playButton = Game::create<Button>(Vector(16, 16), Vector(300 - 32, 64));
+    playButton = Game::create<TextButton>(Vector(16, 16), Vector(300 - 32, 64), "Play", 32, "defaultFont");
     playButton->setColor(32, 32, 32, 255);
 
     playButton->pressHandlers.push_back([this]()
@@ -91,7 +95,7 @@ void MainMenu::createVisuals()
 
     buttonPanel->addChild(playButton);
 
-    settingsButton = Game::create<Button>(Vector(16, 16 + (16 + 64)), Vector(300 - 32, 64));
+    settingsButton = Game::create<TextButton>(Vector(16, 16 + (16 + 64)), Vector(300 - 32, 64), "Settings", 32, "defaultFont");
     settingsButton->setColor(32, 32, 32, 255);
 
     settingsButton->pressHandlers.push_back([this]()
@@ -99,7 +103,7 @@ void MainMenu::createVisuals()
 
     buttonPanel->addChild(settingsButton);
 
-    quitButton = Game::create<Button>(Vector(16, 16 + 2 * (16 + 64)), Vector(300 - 32, 64));
+    quitButton = Game::create<TextButton>(Vector(16, 16 + 2 * (16 + 64)), Vector(300 - 32, 64), "Quit", 32, "defaultFont");
     quitButton->setColor(32, 32, 32, 255);
 
     quitButton->pressHandlers.push_back([this]()
