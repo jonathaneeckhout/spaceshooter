@@ -19,7 +19,11 @@ protected:
     void dropLoot() override;
 
 private:
+    float collisionDamage = 30.0;
+
     void loadEntities();
 
     void createVisuals();
+
+    void handleCollisiontStarted(CollisionShape *shape);
 };

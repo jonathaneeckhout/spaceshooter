@@ -20,7 +20,7 @@ void Zap::init()
 
     addChild(destroyTimer);
 
-    auto collisionShape = Game::create<CollisionShapeSquare>(Vector(-4, -4), Vector(8, 8));
+    auto collisionShape = Game::create<CollisionShapeSquare>(Vector(-8, -8), Vector(16, 16));
     collisionShape->setName("CollisionShape");
 
     collisionShape->inLayer = Config::NoCollisionLayer;
@@ -44,7 +44,7 @@ void Zap::update(float dt)
 
 void Zap::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-2, -2}, Vector(8.0, 8.0));
+    auto body = Game::create<Square>(Vector{-8, -8}, Vector(16.0, 16.0));
 
     body->setColor(0xAA, 0x22, 0xCC, 255);
 

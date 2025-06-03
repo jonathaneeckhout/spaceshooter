@@ -10,7 +10,9 @@ class Player : public Body
 public:
     class Map *map = nullptr;
 
-    float speed = 400.0;
+    float maxSpeed = 500.0;
+    float accelerationRate = 3000.0f;
+    float friction = 1200.0f;
 
     Player(Vector position);
     ~Player();

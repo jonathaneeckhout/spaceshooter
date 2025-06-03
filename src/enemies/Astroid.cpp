@@ -4,8 +4,8 @@
 
 Astroid::Astroid(Vector position) : Enemy(position, Vector(0, 1))
 {
-    speed = 150.0;
-    health = 10.0;
+    speed = 400.0;
+    health = 20.0;
     score = 5;
 }
 
@@ -22,18 +22,21 @@ void Astroid::cleanup() {}
 
 void Astroid::loadEntities()
 {
-    collisionShape = Game::create<CollisionShapeSquare>(Vector(-16, -16), Vector(32, 32));
+    collisionShape = Game::create<CollisionShapeSquare>(Vector(-32, -32), Vector(96, 96));
     collisionShape->setName("CollisionShape");
 
     collisionShape->inLayer = Config::EnemyCollisionLayer;
     collisionShape->viewLayer = Config::PlayerCollisionLayer;
+
+    collisionShape->collisionStartHandlers.push_back([this](CollisionShape *shape)
+                                                     { handleCollisiontStarted(shape); });
 
     addChild(collisionShape);
 }
 
 void Astroid::createVisuals()
 {
-    auto body = Game::create<Square>(Vector{-16, -16}, Vector(32.0, 32.0));
+    auto body = Game::create<Square>(Vector{-32, -32}, Vector(64.0, 64.0));
 
     body->setColor(0x5A, 0x55, 0x4C, 255);
 
@@ -64,4 +67,19 @@ void Astroid::dropLoot()
     auto map = getMap();
 
     map->addPowerup(healthPack);
+}
+
+void Astroid::handleCollisiontStarted(CollisionShape *shape)
+{
+    auto player = dynamic_cast<Player *>(shape->getParent());
+    if (player == nullptr)
+    {
+        return;
+    }
+
+    player->hurt(collisionDamage);
+
+    Game::getInstance()->mixer->playSound("ZapImpact");
+
+    queueDelete();
 }

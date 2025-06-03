@@ -163,32 +163,49 @@ void Player::update(float dt)
 
 void Player::updateMovement(float dt)
 {
-    velocity = Vector();
-
+    Vector inputDirection;
     if (moveLeft)
     {
-        velocity.x -= 1;
+        inputDirection.x -= 1;
     }
     if (moveRight)
     {
-        velocity.x += 1;
+        inputDirection.x += 1;
     }
     if (moveUp)
     {
-        velocity.y -= 1;
+        inputDirection.y -= 1;
     }
     if (moveDown)
     {
-        velocity.y += 1;
+        inputDirection.y += 1;
     }
 
-    velocity = velocity.normalize();
+    if (inputDirection.magnitude() > 0)
+    {
+        inputDirection = inputDirection.normalize();
 
-    velocity *= speed;
+        velocity += inputDirection * accelerationRate * dt;
+    }
+    else
+    {
+        if (velocity.magnitude() > 0)
+        {
+            Vector frictionForce = -velocity.normalize() * friction * dt;
+            if (frictionForce.magnitude() > velocity.magnitude())
+                velocity = Vector();
+            else
+                velocity += frictionForce;
+        }
+    }
+
+    if (velocity.magnitude() > maxSpeed)
+    {
+        velocity = velocity.normalize() * maxSpeed;
+    }
 
     moveAndStop(dt);
 
-    // Clamp position to the window's size
     clampPosition();
 }
 
@@ -223,7 +240,7 @@ void Player::clampPosition()
     Vector windowSize = Game::getInstance()->renderer->getWindowSize();
 
     pos.x = std::clamp<float>(pos.x, 0.0, windowSize.x);
-    pos.y = std::clamp<float>(pos.y, 0.0, windowSize.y);
+    pos.y = std::clamp<float>(pos.y, 0.0, windowSize.y - 96.0);
 
     setPosition(pos);
 }

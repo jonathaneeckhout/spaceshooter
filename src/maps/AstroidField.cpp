@@ -1,6 +1,7 @@
 #include "maps/AstroidField.hpp"
 
 #include "enemies/Astroid.hpp"
+#include "enemies/Probe.hpp"
 #include "enemies/Disc.hpp"
 
 #include <iostream>
@@ -11,18 +12,68 @@ AstroidField::~AstroidField() {}
 
 void AstroidField::loadEnityQueue()
 {
-    pushEntityToQueue(3.0, std::vector<Entity *>{Game::create<Astroid>(Vector(300, 0))});
-    pushEntityToQueue(2.0, std::vector<Entity *>{Game::create<Astroid>(Vector(200, 0))});
-    pushEntityToQueue(2.5, std::vector<Entity *>{Game::create<Astroid>(Vector(250, 0))});
-    pushEntityToQueue(0.5, std::vector<Entity *>{Game::create<Astroid>(Vector(300, 0)), Game::create<Disc>(Vector(400, 64))});
-    pushEntityToQueue(1.0, std::vector<Entity *>{Game::create<Disc>(Vector(400, 64))});
-    pushEntityToQueue(3.0, std::vector<Entity *>{Game::create<Astroid>(Vector(500, 0)), Game::create<Astroid>(Vector(600, 0))});
-    pushEntityToQueue(1.0, std::vector<Entity *>{Game::create<Astroid>(Vector(400, 0)), Game::create<Disc>(Vector(200, 64)), Game::create<Disc>(Vector(600, 64))});
-    pushEntityToQueue(1.0, std::vector<Entity *>{Game::create<Astroid>(Vector(600, 0)), Game::create<Astroid>(Vector(700, 0))});
-    pushEntityToQueue(3.0, std::vector<Entity *>{Game::create<Astroid>(Vector(100, 0)), Game::create<Astroid>(Vector(300, 0))});
-    pushEntityToQueue(1.0, std::vector<Entity *>{Game::create<Astroid>(Vector(150, 0)), Game::create<Astroid>(Vector(350, 0))});
-    pushEntityToQueue(1.0, std::vector<Entity *>{Game::create<Astroid>(Vector(500, 0)), Game::create<Astroid>(Vector(600, 0))});
-    pushEntityToQueue(0.5, std::vector<Entity *>{Game::create<Astroid>(Vector(500, 0)), Game::create<Astroid>(Vector(600, 0))});
+    Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+    for (int i = 0; i < 15; i++)
+    {
+        float delay = (Game::getInstance()->getRandomFloat() * 1.5) + 0.1;
+
+        int amount = (Game::getInstance()->getRandomFloat() * 3) + 1;
+
+        std::vector<Entity *> astroids;
+
+        for (int j = 0; j < amount; j++)
+        {
+            float x = Game::getInstance()->getRandomFloat() * windowSize.x;
+
+            astroids.push_back(Game::create<Astroid>(Vector(x, 0)));
+        }
+
+        pushEntityToQueue(delay, astroids);
+    }
+
+    for (int i = 0; i < 30; i++)
+    {
+        float delay = (Game::getInstance()->getRandomFloat() * 1.5) + 0.1;
+
+        int amount = (Game::getInstance()->getRandomFloat() * 11) + 1;
+
+        std::vector<Entity *> astroids;
+
+        for (int j = 0; j < amount; j++)
+        {
+            float x = Game::getInstance()->getRandomFloat() * windowSize.x;
+
+            astroids.push_back(Game::create<Astroid>(Vector(x, 0)));
+        }
+
+        pushEntityToQueue(delay, astroids);
+    }
+
+    for (int i = 0; i < 15; i++)
+    {
+        float delay = (Game::getInstance()->getRandomFloat() * 2.5) + 0.5;
+
+        int amount = (Game::getInstance()->getRandomFloat() * 4) + 1;
+
+        std::vector<Entity *> astroids;
+
+        for (int j = 0; j < amount; j++)
+        {
+            // At a random x position
+            float x = Game::getInstance()->getRandomFloat() * windowSize.x;
+            if (Game::getInstance()->shouldHappen(0.2))
+            {
+                astroids.push_back(Game::create<Probe>(Vector(x, 0)));
+            }
+            else
+            {
+                astroids.push_back(Game::create<Astroid>(Vector(x, 0)));
+            }
+        }
+
+        pushEntityToQueue(delay, astroids);
+    }
 }
 
 void AstroidField::playBackgroundSound()
