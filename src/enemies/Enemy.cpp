@@ -26,6 +26,8 @@ void Enemy::hurt(float amount)
 
 Map *Enemy::getMap()
 {
+    auto parent = getParent();
+
     auto entity = dynamic_cast<Entity *>(parent);
     if (!entity)
     {
@@ -37,6 +39,8 @@ Map *Enemy::getMap()
 
 Player *Enemy::getPlayer()
 {
+    auto parent = getParent();
+
     auto entity = dynamic_cast<Entity *>(parent);
     if (!entity)
     {
