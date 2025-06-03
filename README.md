@@ -34,3 +34,26 @@ Build the game
 ``` bash
 cmake --build build
 ```
+
+## How to run
+
+Run the game
+```bash
+./build/Spaceshooter
+```
+
+## To-do
+- Add game loop
+    - Add event when entity is destroyed
+    - Listen to this event for player and last enemy
+    - If player dies -> game over
+    - If last enemy dies -> level complete
+- Display Highscores
+- Add components to player class
+- Turn bullets to type objects
+- Create settings menu
+    - Enable disable music
+    - Keybindings
+- Add 2 extra levels
+- Replace prototypes with assets
+- (Optional) make support for bytecode to easily create new levels

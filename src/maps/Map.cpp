@@ -1,7 +1,9 @@
-#include "maps/Map.hpp"
+#include <iostream>
 
+#include "maps/Map.hpp"
 #include "enemies/Astroid.hpp"
 #include "enemies/Disc.hpp"
+#include "menus/MainMenu.hpp"
 
 Map::Map() {}
 
@@ -25,6 +27,7 @@ void Map::init()
 
 void Map::cleanup()
 {
+    stopBackgroundSound();
 
     deregisterInputs();
 
@@ -61,6 +64,10 @@ void Map::loadEntities()
     player = Game::create<Player>(Vector(windowSize.x / 2, windowSize.y - 80));
     player->setName("Player");
     player->map = this;
+
+    // No need to keep track of this handler as a player cant exist if the map does not exist
+    player->addDeleteHandler([this]()
+                             { handlePlayerDied(); });
     entities->addChild(player);
 
     queueTimer = Game::create<Timer>(0.0);
@@ -139,4 +146,22 @@ void Map::queueTimerCallback()
 Player *Map::getPlayer()
 {
     return player;
+}
+
+void Map::handlePlayerDied()
+{
+    std::cout << "Bye Crueld world" << std::endl;
+
+    player = nullptr;
+
+    auto mainMenu = Game::create<MainMenu>();
+    Game::getInstance()->setRootObject(mainMenu);
+}
+
+void Map::handleGameEnd()
+{
+    std::cout << "Level completed!" << std::endl;
+
+    auto mainMenu = Game::create<MainMenu>();
+    Game::getInstance()->setRootObject(mainMenu);
 }

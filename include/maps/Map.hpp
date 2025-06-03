@@ -52,4 +52,7 @@ protected:
 
     void pushEntityToQueue(float loadTime, std::vector<Entity *> entities);
     void queueTimerCallback();
+
+    void handlePlayerDied();
+    void handleGameEnd();
 };

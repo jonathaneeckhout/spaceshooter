@@ -4,8 +4,6 @@
 #include "enemies/Probe.hpp"
 #include "enemies/Disc.hpp"
 
-#include <iostream>
-
 AstroidField::AstroidField() {}
 
 AstroidField::~AstroidField() {}
@@ -74,6 +72,12 @@ void AstroidField::loadEnityQueue()
 
         pushEntityToQueue(delay, astroids);
     }
+
+    auto lastEnemy = Game::create<Disc>(Vector(400, 64));
+    lastEnemy->addDeleteHandler([this]()
+                                { handleGameEnd(); });
+
+    pushEntityToQueue(1.0, std::vector<Entity *>{lastEnemy});
 }
 
 void AstroidField::playBackgroundSound()
