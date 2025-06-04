@@ -5,6 +5,7 @@
 #include "menus/MainMenu.hpp"
 #include "maps/AstroidField.hpp"
 #include "player/Player.hpp"
+#include "Maps.hpp"
 
 #include "audio/music/background-drum-and-bass/background-drum-and-bass-117717.h"
 #include "audio/music/deep-space-atmosphere/deep-space-atmosphere-217294.h"
@@ -84,11 +85,14 @@ static void registerKeyMappings()
 
 static void loadGame()
 {
+
+    auto map = spaceshooter::maps::createAstroidField();
+    game->setRootObject(map);
     // auto map = Game::create<AstroidField>();
     // game->setRootObject(map);
  
-    auto mainMenu =Game::create<MainMenu>();
-    game->setRootObject(mainMenu);
+    // auto mainMenu =Game::create<MainMenu>();
+    // game->setRootObject(mainMenu);
 }
 
 int main()

@@ -22,7 +22,7 @@ void Astroid::cleanup() {}
 
 void Astroid::loadEntities()
 {
-    collisionShape = Game::create<CollisionShapeSquare>(Vector(-32, -32), Vector(96, 96));
+    collisionShape = Game::create<CollisionShapeSquare>(Vector(-32, -32), Vector(64, 64));
     collisionShape->setName("CollisionShape");
 
     collisionShape->inLayer = Config::EnemyCollisionLayer;
