@@ -39,7 +39,7 @@ void ProjectileComponent::onCollision(Object *object, bool collides)
     auto health = object->getChild<HealthComponent>();
     if (health != nullptr)
     {
-        health->hurt(damage);
+        health->hurt(damage, getParent());
     }
 
     getParent()->queueDelete();
