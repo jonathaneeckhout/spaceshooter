@@ -5,6 +5,8 @@
 #include "components/PlayerInputComponent.hpp"
 #include "components/PlayerMovementComponent.hpp"
 #include "components/PlayerShootingComponent.hpp"
+#include "components/HealthComponent.hpp"
+#include "components/HealthBarComponent.hpp"
 
 namespace
 {
@@ -32,6 +34,23 @@ namespace
 
         return muzzle;
     }
+
+    void createUI(Object *obj)
+    {
+        Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+        auto ui = new Object();
+        ui->setName("UI");
+        obj->addChild(ui);
+
+        auto score = jengine::visuals::createLabel(Vector(16.0, windowSize.y - 48.0), "0", 32, "defaultFont");
+        ui->addChild(score);
+
+        auto health = obj->getChild<HealthComponent>();
+
+        auto healtBar = new HealthBarComponent(Vector(windowSize.x - 132, windowSize.y - 48.0), health, Vector(128.0, 32.0));
+        ui->addChild(healtBar);
+    }
 }
 namespace spaceshooter
 {
@@ -49,7 +68,12 @@ namespace spaceshooter
 
             Vector size = {64.0, 64.0};
 
-            auto physics = new PhysicsComponent(transform);
+            auto collision = new SquareCollisionComponent(transform, size);
+            collision->inLayer = Config::PlayerCollisionLayer;
+            collision->viewLayer = Config::WorldCollisionLayer;
+            obj->addChild(collision);
+
+            auto physics = new PhysicsComponent(transform, collision);
             obj->addChild(physics);
 
             auto inputs = new PlayerInputComponent();
@@ -67,7 +91,12 @@ namespace spaceshooter
             auto shooting = new PlayerShootingComponent(inputs, weapon1Muzzle, weapon1Timer, map);
             obj->addChild(shooting);
 
+            auto health = new HealthComponent(100.0);
+            obj->addChild(health);
+
             createVisuals(obj);
+
+            createUI(obj);
 
             return obj;
         }

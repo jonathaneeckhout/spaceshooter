@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include "components/ProjectileComponent.hpp"
+#include "components/HealthComponent.hpp"
 
 ProjectileComponent::ProjectileComponent(
     TransformComponent *transform,
@@ -28,7 +29,18 @@ void ProjectileComponent::update(float dt)
     transform->setPosition(newPosition);
 }
 
-void ProjectileComponent::onCollision(Object *, bool)
+void ProjectileComponent::onCollision(Object *object, bool collides)
 {
+    if (!collides)
+    {
+        return;
+    }
+
+    auto health = object->getChild<HealthComponent>();
+    if (health != nullptr)
+    {
+        health->hurt(damage);
+    }
+
     getParent()->queueDelete();
 }

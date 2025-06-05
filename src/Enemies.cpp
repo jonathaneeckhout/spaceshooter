@@ -1,6 +1,7 @@
 #include "Enemies.hpp"
 #include "Config.hpp"
 #include "components/ProjectileComponent.hpp"
+#include "components/HealthComponent.hpp"
 
 namespace spaceshooter
 {
@@ -26,6 +27,9 @@ namespace spaceshooter
 
             auto body = jengine::visuals::createSquare(-size / 2, size, {0x5A, 0x55, 0x4C, 255});
             obj->addChild(body);
+
+            auto health = new HealthComponent(20.0);
+            obj->addChild(health);
 
             return obj;
         }
