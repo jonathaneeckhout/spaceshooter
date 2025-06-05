@@ -2,7 +2,7 @@
 
 #include <jengine/jengine.hpp>
 
-class QuitOnEscapeComponent : public Component
+class QuitOnEscapeComponent : public Object
 {
 public:
     QuitOnEscapeComponent();

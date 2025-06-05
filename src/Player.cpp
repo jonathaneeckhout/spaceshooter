@@ -28,7 +28,7 @@ namespace
         auto muzzle = new Object();
 
         auto transform = new TransformComponent(position);
-        muzzle->addComponent(transform);
+        muzzle->addChild(transform);
 
         return muzzle;
     }
@@ -45,22 +45,18 @@ namespace spaceshooter
             obj->setName(name);
 
             auto transform = new TransformComponent(position);
-            obj->addComponent(transform);
+            obj->addChild(transform);
 
             Vector size = {64.0, 64.0};
 
-            auto collisionShape = new CollisionShapeSquare(-size / 2, size);
-            collisionShape->inLayer = Config::WorldCollisionLayer;
-            collisionShape->viewLayer = Config::WorldCollisionLayer;
-
-            auto physics = new PhysicsComponent(transform, collisionShape);
-            obj->addComponent(physics);
+            auto physics = new PhysicsComponent(transform);
+            obj->addChild(physics);
 
             auto inputs = new PlayerInputComponent();
-            obj->addComponent(inputs);
+            obj->addChild(inputs);
 
             auto movement = new PlayerMovementComponent(transform, physics, inputs);
-            obj->addComponent(movement);
+            obj->addChild(movement);
 
             auto weapon1Muzzle = createWeaponMuzzle(Vector(0, -64.0));
             obj->addChild(weapon1Muzzle);
@@ -69,7 +65,7 @@ namespace spaceshooter
             obj->addChild(weapon1Timer);
 
             auto shooting = new PlayerShootingComponent(inputs, weapon1Muzzle, weapon1Timer, map);
-            obj->addComponent(shooting);
+            obj->addChild(shooting);
 
             createVisuals(obj);
 

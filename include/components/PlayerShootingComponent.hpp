@@ -3,7 +3,7 @@
 #include <jengine/jengine.hpp>
 #include "components/PlayerInputComponent.hpp"
 
-class PlayerShootingComponent : public Component
+class PlayerShootingComponent : public Object
 {
 public:
     PlayerShootingComponent(

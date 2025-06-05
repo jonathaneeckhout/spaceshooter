@@ -15,12 +15,12 @@ PlayerShootingComponent::PlayerShootingComponent(
 
     assert(weapon1Muzzle != nullptr && "Missing weapon1Muzzle component");
 
-    weapon1MuzzleTransform = weapon1Muzzle->getComponent<TransformComponent>();
+    weapon1MuzzleTransform = weapon1Muzzle->getChild<TransformComponent>();
     assert(weapon1MuzzleTransform != nullptr && "Missing weapon1Muzzle transform component");
 
     assert(weapon1Timer != nullptr && "Missing weapon1Timer component");
 
-    weapon1TimerComponent = weapon1Timer->getComponent<TimerComponent>();
+    weapon1TimerComponent = weapon1Timer->getChild<TimerComponent>();
     assert(weapon1TimerComponent != nullptr && "Missing weapon1Timer timer component");
 
     weapon1TimerComponent->setTimeout(weapon1Delay);
@@ -42,7 +42,7 @@ void PlayerShootingComponent::update(float)
 
         weapon1TimerComponent->start();
 
-        auto bullet = spaceshooter::projectiles::createBullet(weapon1MuzzleTransform->getGlobalPosition(), Vector(0.0, -1.0));
+        auto bullet = spaceshooter::projectiles::createBullet(weapon1MuzzleTransform->getGlobalPosition(), Vector(0.0, -1.0), true);
 
         projectiles->addChild(bullet);
     }

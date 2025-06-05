@@ -3,6 +3,7 @@
 #include "Maps.hpp"
 #include "Player.hpp"
 #include "components/QuitOnEscapeComponent.hpp"
+#include "Enemies.hpp"
 
 namespace
 {
@@ -23,10 +24,10 @@ namespace spaceshooter
             Object *obj = new Object();
 
             auto transform = new TransformComponent(Vector());
-            obj->addComponent(transform);
+            obj->addChild(transform);
 
             auto quit = new QuitOnEscapeComponent();
-            obj->addComponent(quit);
+            obj->addChild(quit);
 
             loadGrouping(obj, "Entities");
             loadGrouping(obj, "Projectiles");
@@ -36,6 +37,10 @@ namespace spaceshooter
 
             auto player = spaceshooter::player::createPlayer("Player", obj, Vector(windowSize.x / 2, windowSize.y - 80));
             obj->addChild(player);
+
+            //Debug line
+            auto enemy = spaceshooter::enemies::createAstroid(Vector(windowSize.x/2, 64));
+            obj->getChildByName("Entities")->addChild(enemy);
 
             return obj;
         }

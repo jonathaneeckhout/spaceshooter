@@ -4,7 +4,7 @@
 
 #include <jengine/jengine.hpp>
 
-class PlayerInputComponent : public Component
+class PlayerInputComponent : public Object
 {
 public:
     bool moveLeft = false;

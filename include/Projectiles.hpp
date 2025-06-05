@@ -6,6 +6,6 @@ namespace spaceshooter
 {
     namespace projectiles
     {
-        Object *createBullet(Vector position, Vector direction);
+        Object *createBullet(Vector position, Vector direction, bool isPlayer);
     }
 }

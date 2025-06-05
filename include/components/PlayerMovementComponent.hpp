@@ -3,7 +3,7 @@
 #include <jengine/jengine.hpp>
 #include "components/PlayerInputComponent.hpp"
 
-class PlayerMovementComponent : public Component
+class PlayerMovementComponent : public Object
 {
 public:
     float maxSpeed = 500.0;

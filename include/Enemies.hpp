@@ -1,8 +1,10 @@
 #pragma once
 
 #include <jengine/jengine.hpp>
-
-namespace enemies
+namespace spaceshooter
 {
-    Object *createAstroid(Vector position);
+    namespace enemies
+    {
+        Object *createAstroid(Vector position);
+    }
 }

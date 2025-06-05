@@ -2,7 +2,7 @@
 
 QuitOnEscapeComponent::QuitOnEscapeComponent()
 {
-    quitCallbackID = Game::getInstance()->controls->addKeyHandler([this](std::string key, bool pressed)
+    quitCallbackID = Game::getInstance()->controls->addKeyHandler([](std::string key, bool pressed)
                                                                   {
         if (!pressed) {
             return;
