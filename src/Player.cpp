@@ -7,6 +7,8 @@
 #include "components/PlayerShootingComponent.hpp"
 #include "components/HealthComponent.hpp"
 #include "components/HealthBarComponent.hpp"
+#include "components/ScoreComponent.hpp"
+#include "components/ScoreDisplayComponent.hpp"
 
 namespace
 {
@@ -43,13 +45,15 @@ namespace
         ui->setName("UI");
         obj->addChild(ui);
 
-        auto score = jengine::visuals::createLabel(Vector(16.0, windowSize.y - 48.0), "0", 32, "defaultFont");
-        ui->addChild(score);
-
         auto health = obj->getChild<HealthComponent>();
 
         auto healtBar = new HealthBarComponent(Vector(windowSize.x - 132, windowSize.y - 48.0), health, Vector(128.0, 32.0));
         ui->addChild(healtBar);
+
+        auto score = obj->getChild<ScoreComponent>();
+
+        auto scoreDisplay = new ScoreDisplayComponent(Vector(16.0, 600 - 48.0), score, 32, "defaultFont");
+        ui->addChild(scoreDisplay);
     }
 }
 namespace spaceshooter
@@ -93,6 +97,9 @@ namespace spaceshooter
 
             auto health = new HealthComponent(100.0);
             obj->addChild(health);
+
+            auto score = new ScoreComponent();
+            obj->addChild(score);
 
             createVisuals(obj);
 

@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "components/HealthBarComponent.hpp"
 
 HealthBarComponent::HealthBarComponent(
@@ -7,6 +9,8 @@ HealthBarComponent::HealthBarComponent(
     : health(health),
       size(size)
 {
+    assert(health != nullptr && "Missing health component");
+
     TransformComponent *transform = new TransformComponent(position);
     addChild(transform);
 

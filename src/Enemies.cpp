@@ -2,6 +2,7 @@
 #include "Config.hpp"
 #include "components/ProjectileComponent.hpp"
 #include "components/HealthComponent.hpp"
+#include "components/GiveScoreComponent.hpp"
 
 namespace spaceshooter
 {
@@ -30,6 +31,9 @@ namespace spaceshooter
 
             auto health = new HealthComponent(20.0);
             obj->addChild(health);
+
+            auto giveScore = new GiveScoreComponent(health, 5);
+            obj->addChild(giveScore);
 
             return obj;
         }
