@@ -20,6 +20,7 @@ GiveScoreComponent::GiveScoreComponent(
 
 void GiveScoreComponent::onDeath(Object *)
 {
+    // TODO: find a more elegant way to achieve this
     // (this) GiveScoreComponent // (parent) Enemy // (parent) Entities // (parent) Map // (child) Player
     auto player = getParent()->getParent()->getParent()->getChildByName("Player");
 

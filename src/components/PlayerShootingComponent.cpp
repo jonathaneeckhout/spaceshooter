@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "components/PlayerShootingComponent.hpp"
-#include "Projectiles.hpp"
+#include "factories/Projectiles.hpp"
 
 PlayerShootingComponent::PlayerShootingComponent(
     PlayerInputComponent *input,

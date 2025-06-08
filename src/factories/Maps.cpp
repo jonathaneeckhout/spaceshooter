@@ -1,9 +1,9 @@
 #include <string>
 
-#include "Maps.hpp"
-#include "Player.hpp"
+#include "factories/Maps.hpp"
+#include "factories/Player.hpp"
 #include "components/QuitOnEscapeComponent.hpp"
-#include "Enemies.hpp"
+#include "factories/Enemies.hpp"
 
 namespace
 {
@@ -38,9 +38,15 @@ namespace spaceshooter
             auto player = spaceshooter::player::createPlayer("Player", obj, Vector(windowSize.x / 2, windowSize.y - 80));
             obj->addChild(player);
 
-            //Debug line
-            auto enemy = spaceshooter::enemies::createAstroid(Vector(windowSize.x/2, 64));
+            // Debug line
+            auto enemy = spaceshooter::enemies::createAstroid(Vector(windowSize.x / 2, 64));
             obj->getChildByName("Entities")->addChild(enemy);
+
+            auto enemy1 = spaceshooter::enemies::createAstroid(Vector(600, 64));
+            obj->getChildByName("Entities")->addChild(enemy1);
+
+            auto enemy2 = spaceshooter::enemies::createAstroid(Vector(128, 64));
+            obj->getChildByName("Entities")->addChild(enemy2);
 
             return obj;
         }

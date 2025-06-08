@@ -1,12 +1,11 @@
 #pragma once
 
 #include <jengine/jengine.hpp>
+
 namespace spaceshooter
 {
-    namespace maps
+    namespace powerups
     {
-
-        Object *createAstroidField();
-
+        Object *createHealthPack(Vector position);
     }
 }

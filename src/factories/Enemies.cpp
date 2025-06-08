@@ -1,8 +1,10 @@
-#include "Enemies.hpp"
+#include "factories/Enemies.hpp"
 #include "Config.hpp"
 #include "components/ProjectileComponent.hpp"
 #include "components/HealthComponent.hpp"
 #include "components/GiveScoreComponent.hpp"
+#include "components/LootComponent.hpp"
+#include "factories/PowerUps.hpp"
 
 namespace spaceshooter
 {
@@ -21,6 +23,7 @@ namespace spaceshooter
             auto collision = new SquareCollisionComponent(transform, size);
             collision->inLayer = Config::EnemyCollisionLayer;
             collision->viewLayer = Config::PlayerCollisionLayer;
+            collision->center = true;
             obj->addChild(collision);
 
             auto projectile = new ProjectileComponent(transform, collision, 32.0, 30.0);
@@ -34,6 +37,17 @@ namespace spaceshooter
 
             auto giveScore = new GiveScoreComponent(health, 5);
             obj->addChild(giveScore);
+
+            auto loot = new LootComponent(transform, health);
+
+            std::function<Object *(Vector)> lootFunc = [](Vector pos)
+            {
+                return spaceshooter::powerups::createHealthPack(pos);
+            };
+
+            loot->setLoot(lootFunc, 1.0);
+
+            obj->addChild(loot);
 
             return obj;
         }

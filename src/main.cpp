@@ -2,7 +2,7 @@
 #include <csignal>
 #include <jengine/jengine.hpp>
 
-#include "Maps.hpp"
+#include "factories/Maps.hpp"
 
 #include "audio/music/background-drum-and-bass/background-drum-and-bass-117717.h"
 #include "audio/music/deep-space-atmosphere/deep-space-atmosphere-217294.h"

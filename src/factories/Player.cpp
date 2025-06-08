@@ -1,6 +1,6 @@
 #include "cassert"
 
-#include "Player.hpp"
+#include "factories/Player.hpp"
 #include "Config.hpp"
 #include "components/PlayerInputComponent.hpp"
 #include "components/PlayerMovementComponent.hpp"
@@ -75,6 +75,7 @@ namespace spaceshooter
             auto collision = new SquareCollisionComponent(transform, size);
             collision->inLayer = Config::PlayerCollisionLayer;
             collision->viewLayer = Config::WorldCollisionLayer;
+            collision->center = true;
             obj->addChild(collision);
 
             auto physics = new PhysicsComponent(transform, collision);

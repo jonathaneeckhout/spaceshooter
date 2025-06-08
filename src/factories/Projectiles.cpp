@@ -1,4 +1,4 @@
-#include "Projectiles.hpp"
+#include "factories/Projectiles.hpp"
 #include "Config.hpp"
 #include "components/ProjectileComponent.hpp"
 #include "components/DeleteoffScreenComponent.hpp"
@@ -31,6 +31,8 @@ namespace spaceshooter
             {
                 collision->viewLayer = Config::PlayerCollisionLayer;
             }
+
+            collision->center = true;
 
             obj->addChild(collision);
 
