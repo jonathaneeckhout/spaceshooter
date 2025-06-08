@@ -11,10 +11,7 @@ ScoreDisplayComponent::ScoreDisplayComponent(
 {
     assert(score != nullptr && "Missing score component");
 
-    TransformComponent *transform = new TransformComponent(position);
-    addChild(transform);
-
-    label = new TextComponent(transform, std::to_string(score->getScore()), size, resourceName);
+    label = new TextComponent(position, std::to_string(score->getScore()), size, resourceName);
     addChild(label);
 
     std::function<void(unsigned int)> handler = [this](unsigned int value)

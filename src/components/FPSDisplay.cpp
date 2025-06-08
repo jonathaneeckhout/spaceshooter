@@ -4,10 +4,7 @@
 
 FPSDisplay::FPSDisplay(Vector position, unsigned int size, const std::string &resourceName)
 {
-    TransformComponent *transform = new TransformComponent(position);
-    addChild(transform);
-
-    label = new TextComponent(transform, "0 FPS", size, resourceName);
+    label = new TextComponent(position, "0 FPS", size, resourceName);
     addChild(label);
 }
 
