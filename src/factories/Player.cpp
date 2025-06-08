@@ -9,6 +9,7 @@
 #include "components/HealthBarComponent.hpp"
 #include "components/ScoreComponent.hpp"
 #include "components/ScoreDisplayComponent.hpp"
+#include "components/FPSDisplay.hpp"
 
 namespace
 {
@@ -54,6 +55,9 @@ namespace
 
         auto scoreDisplay = new ScoreDisplayComponent(Vector(16.0, 600 - 48.0), score, 32, "defaultFont");
         ui->addChild(scoreDisplay);
+
+        auto fps = new FPSDisplay(Vector(32.0, 32.0), 32, "defaultFont");
+        ui->addChild(fps);
     }
 }
 namespace spaceshooter
