@@ -3,6 +3,7 @@
 #include <jengine/jengine.hpp>
 
 #include "factories/Maps.hpp"
+#include "factories/Menus.hpp"
 
 #include "audio/music/background-drum-and-bass/background-drum-and-bass-117717.h"
 #include "audio/music/deep-space-atmosphere/deep-space-atmosphere-217294.h"
@@ -83,8 +84,11 @@ static void registerKeyMappings()
 static void loadGame()
 {
 
-    auto map = spaceshooter::maps::createAstroidField();
-    game->setRootObject(map);
+    // auto map = spaceshooter::maps::createAstroidField();
+    // game->setRootObject(map);
+
+    auto mainMenu = spaceshooter::menus::createMainMenu();
+    game->setRootObject(mainMenu);
 }
 
 int main()

@@ -11,13 +11,10 @@ HealthBarComponent::HealthBarComponent(
 {
     assert(health != nullptr && "Missing health component");
 
-    TransformComponent *transform = new TransformComponent(position);
-    addChild(transform);
-
-    backgroundBar = new SquareComponent(transform, size, backgroundBarColor);
+    backgroundBar = new SquareComponent(position, size, backgroundBarColor);
     addChild(backgroundBar);
 
-    bar = new SquareComponent(transform, size, barColor);
+    bar = new SquareComponent(position, size, barColor);
     addChild(bar);
 
     std::function<void(float)> handler = [this](float value)
