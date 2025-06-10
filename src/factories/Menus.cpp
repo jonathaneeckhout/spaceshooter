@@ -1,4 +1,6 @@
 #include "factories/Menus.hpp"
+#include "factories/Maps.hpp"
+#include "components/ButtonKeyboardComponent.hpp"
 
 namespace spaceshooter
 {
@@ -18,13 +20,35 @@ namespace spaceshooter
             obj->addChild(buttonPanel);
 
             auto playButton = new TextButtonComponent(Vector(16, 16), Vector(300 - 32, 64), "Play", 32, "defaultFont");
+
+            std::function<void()> playHandler = []()
+            {
+                auto map = spaceshooter::maps::createAstroidField();
+                Game::getInstance()->setRootObject(map);
+            };
+            playButton->addEventHandler("onPressed", playHandler);
+
             buttonPanel->addChild(playButton);
 
             auto settingsButton = new TextButtonComponent(Vector(16, 16 + (16 + 64)), Vector(300 - 32, 64), "Settings", 32, "defaultFont");
             buttonPanel->addChild(settingsButton);
 
             auto quitButton = new TextButtonComponent(Vector(16, 16 + 2 * (16 + 64)), Vector(300 - 32, 64), "Quit", 32, "defaultFont");
+
+            std::function<void()> quitHandler = []()
+            {
+                Game::getInstance()->stop();
+            };
+            quitButton->addEventHandler("onPressed", quitHandler);
+
             buttonPanel->addChild(quitButton);
+
+            auto buttonControls = new ButtonKeyboardComponent();
+            buttonControls->addButton(playButton);
+            buttonControls->addButton(settingsButton);
+            buttonControls->addButton(quitButton);
+
+            buttonPanel->addChild(buttonControls);
 
             return obj;
         }
