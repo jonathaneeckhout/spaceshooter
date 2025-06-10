@@ -13,13 +13,17 @@ namespace spaceshooter
     {
         Object *createAstroid(Vector position)
         {
+            Vector size = {64.0, 64.0};
+            float speed = 300.0f;
+            float damage = 30.0f;
+            float maxHealth = 20.0f;
+            unsigned int score = 5;
+
             auto obj = new Object();
             obj->setName("Astroid");
 
             auto transform = new TransformComponent(position, Vector(0, 1));
             obj->addChild(transform);
-
-            Vector size = {64.0, 64.0};
 
             auto collision = new SquareCollisionComponent(Vector(), size);
             collision->inLayer = Config::EnemyCollisionLayer;
@@ -27,7 +31,7 @@ namespace spaceshooter
             collision->setCentered(true);
             obj->addChild(collision);
 
-            auto projectile = new ProjectileComponent(transform, collision, 400.0, 30.0);
+            auto projectile = new ProjectileComponent(transform, collision, speed, damage);
             obj->addChild(projectile);
 
             auto deletion = new DeleteoffScreenComponent(transform);
@@ -37,10 +41,10 @@ namespace spaceshooter
             body->setCentered(true);
             obj->addChild(body);
 
-            auto health = new HealthComponent(20.0);
+            auto health = new HealthComponent(maxHealth);
             obj->addChild(health);
 
-            auto giveScore = new GiveScoreComponent(health, 5);
+            auto giveScore = new GiveScoreComponent(health, score);
             obj->addChild(giveScore);
 
             auto loot = new LootComponent(transform, health);
