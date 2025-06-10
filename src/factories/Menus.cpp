@@ -1,3 +1,5 @@
+#include <format>
+
 #include "factories/Menus.hpp"
 #include "factories/Maps.hpp"
 #include "components/ButtonKeyboardComponent.hpp"
@@ -9,6 +11,7 @@ namespace spaceshooter
         Object *createMainMenu()
         {
             Object *obj = new Object();
+            obj->setName("MainMenu");
 
             Vector windowSize = Game::getInstance()->renderer->getWindowSize();
 
@@ -48,6 +51,41 @@ namespace spaceshooter
             buttonControls->addButton(settingsButton);
             buttonControls->addButton(quitButton);
 
+            buttonPanel->addChild(buttonControls);
+
+            return obj;
+        }
+
+        Object *createGameEndedMenu(bool won, unsigned int score)
+        {
+            Object *obj = new Object();
+            obj->setName("GameEndedMenu");
+
+            Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+            auto title = new TextComponent(Vector(windowSize.x / 2, 100), won ? "You won!" : "You died!", 64, "defaultFont");
+            title->centered = true;
+            obj->addChild(title);
+
+            auto buttonPanel = new SquareComponent(Vector(windowSize.x / 2 - 150, 200), Vector(300, 3 * 16 + 2 * 64), {255, 0, 0, 255});
+            obj->addChild(buttonPanel);
+
+            auto scoreLabel = new TextComponent(Vector(16, 16), std::format("Score: {}", score), 32, "defaultFont");
+            buttonPanel->addChild(scoreLabel);
+
+            auto continueButton = new TextButtonComponent(Vector(16, 16*2 + 32), Vector(300 - 32, 64), "Continue", 32, "defaultFont");
+
+            std::function<void()> continueHandler = []()
+            {
+                auto mainMenu = createMainMenu();
+                Game::getInstance()->setRootObject(mainMenu);
+            };
+            continueButton->addEventHandler("onPressed", continueHandler);
+
+            buttonPanel->addChild(continueButton);
+
+            auto buttonControls = new ButtonKeyboardComponent();
+            buttonControls->addButton(continueButton);
             buttonPanel->addChild(buttonControls);
 
             return obj;

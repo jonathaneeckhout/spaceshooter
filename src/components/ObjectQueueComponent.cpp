@@ -68,3 +68,8 @@ void ObjectQueueComponent::queueTimerCallback()
 
     startIfNotEmpty();
 }
+
+void ObjectQueueComponent::stop()
+{
+    queueTimer->stop();
+}

@@ -20,7 +20,11 @@ public:
 
     void pushEntityToQueue(float loadTime, std::vector<Object *> objects);
 
+    void stop();
+
 private:
+    bool stopped = false;
+
     Object *spawnLocation = nullptr;
     std::queue<QueuedObjects *> objectQueue;
 

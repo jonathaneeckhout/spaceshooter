@@ -82,10 +82,6 @@ static void registerKeyMappings()
 
 static void loadGame()
 {
-
-    // auto map = spaceshooter::maps::createAstroidField();
-    // game->setRootObject(map);
-
     auto mainMenu = spaceshooter::menus::createMainMenu();
     game->setRootObject(mainMenu);
 }

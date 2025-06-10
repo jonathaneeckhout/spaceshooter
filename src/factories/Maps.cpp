@@ -1,10 +1,13 @@
 #include <string>
+#include <iostream>
 
 #include "factories/Maps.hpp"
 #include "factories/Player.hpp"
 #include "factories/Enemies.hpp"
+#include "factories/Menus.hpp"
 #include "components/QuitOnEscapeComponent.hpp"
 #include "components/ObjectQueueComponent.hpp"
+#include "components/GameEndComponent.hpp"
 
 namespace
 {
@@ -37,7 +40,6 @@ namespace spaceshooter
             Vector windowSize = Game::getInstance()->renderer->getWindowSize();
 
             auto player = spaceshooter::player::createPlayer("Player", obj, Vector(windowSize.x / 2, windowSize.y - 80));
-            // auto player = spaceshooter::player::createPlayer("Player", obj, Vector(0,0));
 
             obj->addChild(player);
 
@@ -62,6 +64,21 @@ namespace spaceshooter
 
                 objectQueue->pushEntityToQueue(delay, astroids);
             }
+
+            auto lastEnemy = spaceshooter::enemies::createAstroid(Vector(windowSize.x / 2, 0));
+            objectQueue->pushEntityToQueue(1.0, std::vector<Object *>{lastEnemy});
+
+            auto gameEnd = new GameEndComponent(player, lastEnemy, 3.0);
+            std::function<void(bool, unsigned int)> gameEndHanlder = [objectQueue](bool won, unsigned int score)
+            {
+                objectQueue->stop();
+
+                auto gameEndedMenu = spaceshooter::menus::createGameEndedMenu(won, score);
+                Game::getInstance()->setRootObject(gameEndedMenu);
+            };
+
+            gameEnd->addEventHandler("onGameEnded", gameEndHanlder);
+            obj->addChild(gameEnd);
 
             return obj;
         }

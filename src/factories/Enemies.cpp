@@ -5,6 +5,7 @@
 #include "components/GiveScoreComponent.hpp"
 #include "components/LootComponent.hpp"
 #include "factories/PowerUps.hpp"
+#include "components/DeleteoffScreenComponent.hpp"
 
 namespace spaceshooter
 {
@@ -29,6 +30,9 @@ namespace spaceshooter
             auto projectile = new ProjectileComponent(transform, collision, 400.0, 30.0);
             obj->addChild(projectile);
 
+            auto deletion = new DeleteoffScreenComponent(transform);
+            obj->addChild(deletion);
+
             auto body = new SquareComponent(Vector(), size, {0x5A, 0x55, 0x4C, 255});
             body->setCentered(true);
             obj->addChild(body);
@@ -46,7 +50,7 @@ namespace spaceshooter
                 return spaceshooter::powerups::createHealthPack(pos);
             };
 
-            loot->setLoot(lootFunc, 1.0);
+            loot->setLoot(lootFunc, 0.1);
 
             obj->addChild(loot);
 
