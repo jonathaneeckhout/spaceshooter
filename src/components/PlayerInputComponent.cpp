@@ -31,12 +31,8 @@ void PlayerInputComponent::handleKey(const std::string &key, bool press)
     {
         moveDown = press;
     }
-    else if (controls->isMapping("FireWeapon1", key))
+    else if (controls->isMapping("Shoot", key))
     {
-        shootWeapon1 = press;
-    }
-    else if (controls->isMapping("FireWeapon2", key))
-    {
-        shootWeapon2 = press;
+        shoot = press;
     }
 }

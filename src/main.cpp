@@ -72,8 +72,7 @@ static void registerKeyMappings()
     controls->registerKeys("MoveLeft", "A");
     controls->registerKeys("MoveRight", "D");
 
-    controls->registerKeys("FireWeapon1", "Keypad 1");
-    controls->registerKeys("FireWeapon2", "Keypad 2");
+    controls->registerKeys("Shoot", "Keypad 1");
 
     controls->registerKeys("MuteMusic", "M");
 

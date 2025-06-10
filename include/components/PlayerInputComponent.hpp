@@ -12,8 +12,7 @@ public:
     bool moveUp = false;
     bool moveDown = false;
 
-    bool shootWeapon1 = false;
-    bool shootWeapon2 = false;
+    bool shoot = false;
 
     PlayerInputComponent();
     ~PlayerInputComponent();

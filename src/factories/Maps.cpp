@@ -2,8 +2,9 @@
 
 #include "factories/Maps.hpp"
 #include "factories/Player.hpp"
-#include "components/QuitOnEscapeComponent.hpp"
 #include "factories/Enemies.hpp"
+#include "components/QuitOnEscapeComponent.hpp"
+#include "components/ObjectQueueComponent.hpp"
 
 namespace
 {
@@ -36,17 +37,31 @@ namespace spaceshooter
             Vector windowSize = Game::getInstance()->renderer->getWindowSize();
 
             auto player = spaceshooter::player::createPlayer("Player", obj, Vector(windowSize.x / 2, windowSize.y - 80));
+            // auto player = spaceshooter::player::createPlayer("Player", obj, Vector(0,0));
+
             obj->addChild(player);
 
-            // Debug line
-            auto enemy = spaceshooter::enemies::createAstroid(Vector(windowSize.x / 2, 64));
-            obj->getChildByName("Entities")->addChild(enemy);
+            auto objectQueue = new ObjectQueueComponent(obj->getChildByName("Entities"));
+            obj->addChild(objectQueue);
 
-            auto enemy1 = spaceshooter::enemies::createAstroid(Vector(600, 64));
-            obj->getChildByName("Entities")->addChild(enemy1);
+            // First wave is a bunch of astroids the player needs to avoid
+            for (int i = 0; i < 15; i++)
+            {
+                float delay = (Game::getInstance()->getRandomFloat() * 1.5) + 0.1;
 
-            auto enemy2 = spaceshooter::enemies::createAstroid(Vector(128, 64));
-            obj->getChildByName("Entities")->addChild(enemy2);
+                int amount = (Game::getInstance()->getRandomFloat() * 3) + 1;
+
+                std::vector<Object *> astroids;
+
+                for (int j = 0; j < amount; j++)
+                {
+                    float x = Game::getInstance()->getRandomFloat() * windowSize.x;
+
+                    astroids.push_back(spaceshooter::enemies::createAstroid(Vector(x, 0)));
+                }
+
+                objectQueue->pushEntityToQueue(delay, astroids);
+            }
 
             return obj;
         }

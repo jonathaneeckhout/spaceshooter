@@ -8,20 +8,18 @@ class PlayerShootingComponent : public Object
 public:
     PlayerShootingComponent(
         PlayerInputComponent *input,
-        Object *weapon1Muzzle,
-        Object *weapon1Timer,
-        Object *map);
+        Object *map,
+        Vector muzzlePosition,
+        float weaponSpeed);
 
     void update(float dt) override;
 
 private:
     PlayerInputComponent *input = nullptr;
 
-    TransformComponent *weapon1MuzzleTransform = nullptr;
+    TransformComponent *weaponMuzzleTransform = nullptr;
 
-    TimerComponent *weapon1TimerComponent = nullptr;
+    TimerComponent *weaponTimerComponent = nullptr;
 
     Object *projectiles = nullptr;
-
-    float weapon1Delay = 0.2;
 };

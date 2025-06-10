@@ -17,10 +17,13 @@ namespace spaceshooter
 
             Vector size = Vector(4.0, 8.0);
 
-            auto body = jengine::visuals::createSquare(-size / 2, size, {0xA0, 0xFC, 0x24, 255});
+            auto body = new SquareComponent(Vector(), size, {0xA0, 0xFC, 0x24, 255});
+            body->setCentered(true);
             obj->addChild(body);
 
-            auto collision = new SquareCollisionComponent(transform, size);
+            auto collision = new SquareCollisionComponent(Vector(), size);
+            collision->setCentered(true);
+
             collision->inLayer = Config::NoCollisionLayer;
 
             if (isPlayer)
@@ -31,8 +34,6 @@ namespace spaceshooter
             {
                 collision->viewLayer = Config::PlayerCollisionLayer;
             }
-
-            collision->center = true;
 
             obj->addChild(collision);
 

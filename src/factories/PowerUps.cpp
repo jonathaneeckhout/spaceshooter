@@ -25,10 +25,10 @@ namespace spaceshooter
             auto deletion = new DeleteoffScreenComponent(transform);
             obj->addChild(deletion);
 
-            auto collision = new SquareCollisionComponent(transform, size);
+            auto collision = new SquareCollisionComponent(Vector(), size);
+            collision->setCentered(true);
             collision->inLayer = Config::NoCollisionLayer;
             collision->viewLayer = Config::PlayerCollisionLayer;
-            collision->center = true;
             obj->addChild(collision);
 
             auto behavior = new LootBehaviorComponent(transform, collision, 30.0f);

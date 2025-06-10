@@ -76,10 +76,10 @@ namespace spaceshooter
 
             Vector size = {64.0, 64.0};
 
-            auto collision = new SquareCollisionComponent(transform, size);
+            auto collision = new SquareCollisionComponent(Vector(), size);
+            collision->setCentered(true);
             collision->inLayer = Config::PlayerCollisionLayer;
             collision->viewLayer = Config::WorldCollisionLayer;
-            collision->center = true;
             obj->addChild(collision);
 
             auto physics = new PhysicsComponent(transform, collision);
@@ -91,13 +91,7 @@ namespace spaceshooter
             auto movement = new PlayerMovementComponent(transform, physics, inputs);
             obj->addChild(movement);
 
-            auto weapon1Muzzle = createWeaponMuzzle(Vector(0, -64.0));
-            obj->addChild(weapon1Muzzle);
-
-            auto weapon1Timer = jengine::utils::createTimer();
-            obj->addChild(weapon1Timer);
-
-            auto shooting = new PlayerShootingComponent(inputs, weapon1Muzzle, weapon1Timer, map);
+            auto shooting = new PlayerShootingComponent(inputs, map, Vector(0, -64.0), 0.2f);
             obj->addChild(shooting);
 
             auto health = new HealthComponent(100.0);

@@ -20,16 +20,17 @@ namespace spaceshooter
 
             Vector size = {64.0, 64.0};
 
-            auto collision = new SquareCollisionComponent(transform, size);
+            auto collision = new SquareCollisionComponent(Vector(), size);
             collision->inLayer = Config::EnemyCollisionLayer;
             collision->viewLayer = Config::PlayerCollisionLayer;
-            collision->center = true;
+            collision->setCentered(true);
             obj->addChild(collision);
 
-            auto projectile = new ProjectileComponent(transform, collision, 32.0, 30.0);
+            auto projectile = new ProjectileComponent(transform, collision, 400.0, 30.0);
             obj->addChild(projectile);
 
-            auto body = jengine::visuals::createSquare(-size / 2, size, {0x5A, 0x55, 0x4C, 255});
+            auto body = new SquareComponent(Vector(), size, {0x5A, 0x55, 0x4C, 255});
+            body->setCentered(true);
             obj->addChild(body);
 
             auto health = new HealthComponent(20.0);
