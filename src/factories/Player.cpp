@@ -15,27 +15,9 @@ namespace
 {
     void createVisuals(Object *obj)
     {
-        auto wings = jengine::visuals::createSquare(Vector{-(64 / 2), -32 / 2}, Vector(64.0, 32.0), {0x5D, 0x8A, 0xA8, 0xFF});
-        obj->addChild(wings);
-
-        auto body = jengine::visuals::createSquare(Vector{-16 / 2, -48}, Vector(16.0, 48.0), {128, 128, 128, 255});
-        obj->addChild(body);
-
-        auto leftBlaster = jengine::visuals::createSquare(Vector{-32, -24}, Vector(2.0, 8.0), {128, 128, 128, 255});
-        obj->addChild(leftBlaster);
-
-        auto rightBlaster = jengine::visuals::createSquare(Vector{32 - 2, -24}, Vector(2.0, 8.0), {128, 128, 128, 255});
-        obj->addChild(rightBlaster);
-    }
-
-    Object *createWeaponMuzzle(Vector position)
-    {
-        auto muzzle = new Object();
-
-        auto transform = new TransformComponent(position);
-        muzzle->addChild(transform);
-
-        return muzzle;
+        auto spaceship = new SpriteComponent(Vector(), "spaceship");
+        spaceship->centered = true;
+        obj->addChild(spaceship);
     }
 
     void createUI(Object *obj)

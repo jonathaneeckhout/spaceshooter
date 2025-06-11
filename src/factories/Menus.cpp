@@ -53,6 +53,13 @@ namespace spaceshooter
 
             buttonPanel->addChild(buttonControls);
 
+            auto soundLoader = new SoundLoaderComponent();
+            soundLoader->addSound("backgroundDeepSpaceAtmosphere", "backgroundDeepSpaceAtmosphere");
+            soundLoader->addSound("button0", "button0");
+            obj->addChild(soundLoader);
+
+            Game::getInstance()->mixer->playSound("backgroundDeepSpaceAtmosphere");
+
             return obj;
         }
 
@@ -73,7 +80,7 @@ namespace spaceshooter
             auto scoreLabel = new TextComponent(Vector(16, 16), std::format("Score: {}", score), 32, "defaultFont");
             buttonPanel->addChild(scoreLabel);
 
-            auto continueButton = new TextButtonComponent(Vector(16, 16*2 + 32), Vector(300 - 32, 64), "Continue", 32, "defaultFont");
+            auto continueButton = new TextButtonComponent(Vector(16, 16 * 2 + 32), Vector(300 - 32, 64), "Continue", 32, "defaultFont");
 
             std::function<void()> continueHandler = []()
             {

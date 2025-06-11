@@ -80,6 +80,19 @@ namespace spaceshooter
             gameEnd->addEventHandler("onGameEnded", gameEndHanlder);
             obj->addChild(gameEnd);
 
+            auto soundLoader = new SoundLoaderComponent();
+            soundLoader->addSound("backgroundDNB", "backgroundDNB");
+            soundLoader->addSound("bullet", "bullet");
+            soundLoader->addSound("bulletImpact", "bulletImpact", 0.8);
+            soundLoader->addSound("zap", "zap", 0.8);
+            soundLoader->addSound("ZapImpact", "ZapImpact");
+            soundLoader->addSound("powerup", "powerup");
+            soundLoader->addSound("EnemyDestroyedExplosion", "explosion0", 0.7);
+            soundLoader->addSound("PlayerDestroyedExplosion", "explosion1");
+            obj->addChild(soundLoader);
+
+            Game::getInstance()->mixer->playSound("backgroundDNB");
+
             return obj;
         }
 

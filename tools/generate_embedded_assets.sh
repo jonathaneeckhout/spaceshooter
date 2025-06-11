@@ -4,7 +4,7 @@
 DIR="assets"
 
 # Extensions to look for
-EXTENSIONS=("mp3" "wav" "ttf" "jpeg")
+EXTENSIONS=("mp3" "wav" "ttf" "png")
 
 for ext in "${EXTENSIONS[@]}"; do
     find "$DIR" -type f -name "*.$ext" | while read -r file; do

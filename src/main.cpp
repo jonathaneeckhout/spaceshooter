@@ -5,9 +5,10 @@
 #include "factories/Maps.hpp"
 #include "factories/Menus.hpp"
 
+#include "fonts/8x8-square-roguelike-ascii-font/8x8-square-roguelike-ascii-font.h"
+
 #include "audio/music/background-drum-and-bass/background-drum-and-bass-117717.h"
 #include "audio/music/deep-space-atmosphere/deep-space-atmosphere-217294.h"
-#include "fonts/8x8-square-roguelike-ascii-font/8x8-square-roguelike-ascii-font.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/Weapons/Lazers/sfx_wpn_laser8.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/SimpleDamageSounds/sfx_damage_hit1.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/Impacts/sfx_sounds_impact3.h"
@@ -16,6 +17,8 @@
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/Explosions/Short/sfx_exp_short_hard2.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/Explosions/MediumLength/sfx_exp_medium5.h"
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/Buttons/sfx_sounds_button7.h"
+
+#include "sprites/spaceship.h"
 
 Game *game = NULL;
 
@@ -45,22 +48,9 @@ static void loadResources()
     resources->loadResource("explosion0", sfx_exp_short_hard2, sfx_exp_short_hard2_len);
     resources->loadResource("explosion1", sfx_exp_medium5, sfx_exp_medium5_len);
     resources->loadResource("button0", sfx_sounds_button7, sfx_sounds_button7_len);
-}
 
-static void loadSounds()
-{
-    auto mixer = Game::getInstance()->mixer;
-
-    mixer->loadSound("backgroundDeepSpaceAtmosphere", "backgroundDeepSpaceAtmosphere");
-    mixer->loadSound("backgroundDNB", "backgroundDNB");
-    mixer->loadSound("bullet", "bullet");
-    mixer->loadSound("bulletImpact", "bulletImpact", 0.8);
-    mixer->loadSound("zap", "zap", 0.8);
-    mixer->loadSound("ZapImpact", "ZapImpact");
-    mixer->loadSound("powerup", "powerup");
-    mixer->loadSound("EnemyDestroyedExplosion", "explosion0", 0.7);
-    mixer->loadSound("PlayerDestroyedExplosion", "explosion1");
-    mixer->loadSound("button0", "button0");
+    // Sprites
+    resources->loadResource("spaceship", spaceship, spaceship_len);
 }
 
 static void registerKeyMappings()
@@ -95,8 +85,6 @@ int main()
     std::signal(SIGINT, signalHandler);
 
     loadResources();
-
-    loadSounds();
 
     registerKeyMappings();
 
