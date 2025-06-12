@@ -37,8 +37,8 @@ namespace spaceshooter
             auto deletion = new DeleteoffScreenComponent(transform);
             obj->addChild(deletion);
 
-            auto body = new SquareComponent(Vector(), size, {0x5A, 0x55, 0x4C, 255});
-            body->setCentered(true);
+            auto body = new SpriteComponent(Vector(), "astroid");
+            body->centered = true;
             obj->addChild(body);
 
             auto health = new HealthComponent(maxHealth);

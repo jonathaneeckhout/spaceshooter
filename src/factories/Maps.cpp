@@ -33,6 +33,9 @@ namespace spaceshooter
             auto quit = new QuitOnEscapeComponent();
             obj->addChild(quit);
 
+            auto background = new ParallaxComponent(Vector(), Vector(0.0, -1.0), 20.f, "stars");
+            obj->addChild(background);
+
             loadGrouping(obj, "Entities");
             loadGrouping(obj, "Projectiles");
             loadGrouping(obj, "Powerups");

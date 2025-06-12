@@ -15,6 +15,9 @@ namespace spaceshooter
 
             Vector windowSize = Game::getInstance()->renderer->getWindowSize();
 
+            auto background = new SpriteComponent(Vector(), "stars");
+            obj->addChild(background);
+
             auto title = new TextComponent(Vector(windowSize.x / 2, 100), "Spaceshooter", 64, "defaultFont");
             title->centered = true;
             obj->addChild(title);
@@ -69,6 +72,9 @@ namespace spaceshooter
             obj->setName("GameEndedMenu");
 
             Vector windowSize = Game::getInstance()->renderer->getWindowSize();
+
+            auto background = new SpriteComponent(Vector(), "stars");
+            obj->addChild(background);
 
             auto title = new TextComponent(Vector(windowSize.x / 2, 100), won ? "You won!" : "You died!", 64, "defaultFont");
             title->centered = true;

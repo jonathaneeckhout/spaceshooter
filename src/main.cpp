@@ -19,6 +19,8 @@
 #include "audio/effects/TheEssentialRetroVideoGameSoundEffectsCollection_ByJuhaniJunkala/GeneralSounds/Buttons/sfx_sounds_button7.h"
 
 #include "sprites/spaceship.h"
+#include "sprites/space_background.h"
+#include "sprites/astroid.h"
 
 Game *game = NULL;
 
@@ -51,6 +53,8 @@ static void loadResources()
 
     // Sprites
     resources->loadResource("spaceship", spaceship, spaceship_len);
+    resources->loadResource("stars", space_background, space_background_len);
+    resources->loadResource("astroid", astroid, astroid_len);
 }
 
 static void registerKeyMappings()
