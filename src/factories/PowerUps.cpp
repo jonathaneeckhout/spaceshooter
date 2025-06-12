@@ -16,7 +16,8 @@ namespace spaceshooter
 
             Vector size = Vector(16.0, 16.0);
 
-            auto body = jengine::visuals::createSquare(-size / 2, size, {0xCE, 0x11, 0x27, 255});
+            auto body = new SpriteComponent(Vector(), "healthpack");
+            body->centered = true;
             obj->addChild(body);
 
             auto transform = new TransformComponent(position, direction);

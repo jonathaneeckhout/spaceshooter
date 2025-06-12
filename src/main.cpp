@@ -21,6 +21,8 @@
 #include "sprites/spaceship.h"
 #include "sprites/space_background.h"
 #include "sprites/astroid.h"
+#include "sprites/healthpack.h"
+#include "sprites/title.h"
 
 Game *game = NULL;
 
@@ -55,6 +57,8 @@ static void loadResources()
     resources->loadResource("spaceship", spaceship, spaceship_len);
     resources->loadResource("stars", space_background, space_background_len);
     resources->loadResource("astroid", astroid, astroid_len);
+    resources->loadResource("healthpack", healthpack, healthpack_len);
+    resources->loadResource("title", title, title_len);
 }
 
 static void registerKeyMappings()

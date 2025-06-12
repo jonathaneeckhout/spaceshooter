@@ -18,7 +18,7 @@ namespace spaceshooter
             auto background = new SpriteComponent(Vector(), "stars");
             obj->addChild(background);
 
-            auto title = new TextComponent(Vector(windowSize.x / 2, 100), "Spaceshooter", 64, "defaultFont");
+            auto title = new SpriteComponent(Vector(windowSize.x / 2, 100), "title");
             title->centered = true;
             obj->addChild(title);
 
