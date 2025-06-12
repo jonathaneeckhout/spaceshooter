@@ -6,5 +6,7 @@ namespace spaceshooter
     namespace enemies
     {
         Object *createAstroid(Vector position);
+
+        Object *createProbe(Vector position);
     }
 }

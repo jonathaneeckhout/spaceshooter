@@ -23,6 +23,7 @@
 #include "sprites/astroid.h"
 #include "sprites/healthpack.h"
 #include "sprites/title.h"
+#include "sprites/probe.h"
 
 Game *game = NULL;
 
@@ -59,6 +60,7 @@ static void loadResources()
     resources->loadResource("astroid", astroid, astroid_len);
     resources->loadResource("healthpack", healthpack, healthpack_len);
     resources->loadResource("title", title, title_len);
+    resources->loadResource("probe", probe, probe_len);
 }
 
 static void registerKeyMappings()

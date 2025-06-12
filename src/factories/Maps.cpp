@@ -46,6 +46,9 @@ namespace spaceshooter
 
             obj->addChild(player);
 
+            auto probe = spaceshooter::enemies::createProbe(Vector(windowSize.x / 2, 0));
+            obj->getChildByName("Entities")->addChild(probe);
+
             auto objectQueue = new ObjectQueueComponent(obj->getChildByName("Entities"));
             obj->addChild(objectQueue);
 
