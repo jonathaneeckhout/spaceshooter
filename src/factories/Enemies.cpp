@@ -6,6 +6,7 @@
 #include "components/LootComponent.hpp"
 #include "factories/PowerUps.hpp"
 #include "components/DeleteoffScreenComponent.hpp"
+#include "components/EnemyShootComponent.hpp"
 
 namespace spaceshooter
 {
@@ -96,6 +97,9 @@ namespace spaceshooter
 
             auto giveScore = new GiveScoreComponent(health, score);
             obj->addChild(giveScore);
+
+            auto shooter = new EnemyShootComponent(Vector(0, 16.0), 1.0);
+            obj->addChild(shooter);
 
             return obj;
         }

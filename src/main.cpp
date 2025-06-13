@@ -2,6 +2,8 @@
 #include <csignal>
 #include <jengine/jengine.hpp>
 
+#include "Spaceshooter.hpp"
+
 #include "factories/Maps.hpp"
 #include "factories/Menus.hpp"
 
@@ -89,6 +91,8 @@ static void loadGame()
 int main()
 {
     game = Game::getInstance();
+
+    Spaceshooter::getInstance();
 
     game->setFPS(60);
 

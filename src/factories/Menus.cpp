@@ -3,6 +3,7 @@
 #include "factories/Menus.hpp"
 #include "factories/Maps.hpp"
 #include "components/ButtonKeyboardComponent.hpp"
+#include "Spaceshooter.hpp"
 
 namespace spaceshooter
 {
@@ -63,6 +64,9 @@ namespace spaceshooter
 
             Game::getInstance()->mixer->playSound("backgroundDeepSpaceAtmosphere");
 
+            auto muter = new MuteComponent("MuteMusic");
+            obj->addChild(muter);
+
             return obj;
         }
 
@@ -100,6 +104,9 @@ namespace spaceshooter
             auto buttonControls = new ButtonKeyboardComponent();
             buttonControls->addButton(continueButton);
             buttonPanel->addChild(buttonControls);
+
+            auto muter = new MuteComponent("MuteMusic");
+            obj->addChild(muter);
 
             return obj;
         }

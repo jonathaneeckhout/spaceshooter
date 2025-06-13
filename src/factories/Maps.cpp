@@ -8,6 +8,7 @@
 #include "components/QuitOnEscapeComponent.hpp"
 #include "components/ObjectQueueComponent.hpp"
 #include "components/GameEndComponent.hpp"
+#include "Spaceshooter.hpp"
 
 namespace
 {
@@ -27,6 +28,8 @@ namespace spaceshooter
         {
             Object *obj = new Object();
 
+            Spaceshooter::getInstance()->setMap(obj);
+
             auto transform = new TransformComponent(Vector());
             obj->addChild(transform);
 
@@ -43,8 +46,16 @@ namespace spaceshooter
             Vector windowSize = Game::getInstance()->renderer->getWindowSize();
 
             auto player = spaceshooter::player::createPlayer("Player", obj, Vector(windowSize.x / 2, windowSize.y - 80));
-
             obj->addChild(player);
+
+            Spaceshooter::getInstance()->setPlayer(player);
+
+            std::function<void()> playerDiedHandler = []()
+            {
+                Spaceshooter::getInstance()->setPlayer(nullptr);
+            };
+
+            player->addEventHandler("onDeleted", playerDiedHandler);
 
             auto probe = spaceshooter::enemies::createProbe(Vector(windowSize.x / 2, 0));
             obj->getChildByName("Entities")->addChild(probe);
@@ -81,6 +92,9 @@ namespace spaceshooter
 
                 auto gameEndedMenu = spaceshooter::menus::createGameEndedMenu(won, score);
                 Game::getInstance()->setRootObject(gameEndedMenu);
+
+                Spaceshooter::getInstance()->setMap(nullptr);
+                Spaceshooter::getInstance()->setPlayer(nullptr);
             };
 
             gameEnd->addEventHandler("onGameEnded", gameEndHanlder);
@@ -98,6 +112,9 @@ namespace spaceshooter
             obj->addChild(soundLoader);
 
             Game::getInstance()->mixer->playSound("backgroundDNB");
+
+            auto muter = new MuteComponent("MuteMusic");
+            obj->addChild(muter);
 
             return obj;
         }
