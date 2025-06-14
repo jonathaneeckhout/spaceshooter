@@ -68,7 +68,7 @@ namespace spaceshooter
             float speed = 75.0f;
             float damage = 10.0f;
             float maxHealth = 50.0f;
-            unsigned int score = 10;
+            unsigned int score = 15;
 
             auto obj = new Object();
             obj->setName("Probe");
@@ -89,6 +89,48 @@ namespace spaceshooter
             obj->addChild(deletion);
 
             auto body = new SpriteComponent(Vector(), "probe");
+            body->centered = true;
+            obj->addChild(body);
+
+            auto health = new HealthComponent(maxHealth);
+            obj->addChild(health);
+
+            auto giveScore = new GiveScoreComponent(health, score);
+            obj->addChild(giveScore);
+
+            auto shooter = new EnemyShootComponent(Vector(0, 16.0), 1.0);
+            obj->addChild(shooter);
+
+            return obj;
+        }
+
+        Object *createDisc(Vector position)
+        {
+            Vector size = {64.0, 64.0};
+            float speed = 75.0f;
+            float damage = 15.0f;
+            float maxHealth = 60.0f;
+            unsigned int score = 30;
+
+            auto obj = new Object();
+            obj->setName("Disc");
+
+            auto transform = new TransformComponent(position, Vector(0, 1));
+            obj->addChild(transform);
+
+            auto collision = new SquareCollisionComponent(Vector(), size);
+            collision->inLayer = Config::EnemyCollisionLayer;
+            collision->viewLayer = Config::PlayerCollisionLayer;
+            collision->setCentered(true);
+            obj->addChild(collision);
+
+            auto projectile = new ProjectileComponent(transform, collision, speed, damage);
+            obj->addChild(projectile);
+
+            auto deletion = new DeleteoffScreenComponent(transform);
+            obj->addChild(deletion);
+
+            auto body = new SpriteComponent(Vector(), "disc");
             body->centered = true;
             obj->addChild(body);
 

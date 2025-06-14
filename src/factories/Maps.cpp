@@ -57,9 +57,6 @@ namespace spaceshooter
 
             player->addEventHandler("onDeleted", playerDiedHandler);
 
-            auto probe = spaceshooter::enemies::createProbe(Vector(windowSize.x / 2, 0));
-            obj->getChildByName("Entities")->addChild(probe);
-
             auto objectQueue = new ObjectQueueComponent(obj->getChildByName("Entities"));
             obj->addChild(objectQueue);
 
@@ -80,6 +77,67 @@ namespace spaceshooter
                 }
 
                 objectQueue->pushEntityToQueue(delay, astroids);
+            }
+
+            // Second wave a bunch of astroid and discs
+            for (int i = 0; i < 15; i++)
+            {
+                float delay = (Game::getInstance()->getRandomFloat() * 2.5) + 0.5;
+
+                int amount = (Game::getInstance()->getRandomFloat() * 4) + 1;
+
+                std::vector<Object *> astroids;
+
+                for (int j = 0; j < amount; j++)
+                {
+                    // At a random x position
+                    float x = Game::getInstance()->getRandomFloat() * windowSize.x;
+                    if (Game::getInstance()->shouldHappen(0.2))
+                    {
+                        astroids.push_back(spaceshooter::enemies::createProbe(Vector(x, 0)));
+                    }
+                    else
+                    {
+                        astroids.push_back(spaceshooter::enemies::createAstroid(Vector(x, 0)));
+                    }
+                }
+
+                objectQueue->pushEntityToQueue(delay, astroids);
+            }
+
+            // Third wave: Mix of asteroids, probes, and disc enemies
+            for (int i = 0; i < 15; i++)
+            {
+                float delay = (Game::getInstance()->getRandomFloat() * 3.0f) + 0.5f;
+
+                int amount = (Game::getInstance()->getRandomFloat() * 5) + 2;
+
+                std::vector<Object *> enemies;
+
+                for (int j = 0; j < amount; j++)
+                {
+                    float x = Game::getInstance()->getRandomFloat() * windowSize.x;
+
+                    float rand = Game::getInstance()->getRandomFloat();
+
+                    if (rand < 0.15f)
+                    {
+                        // 15% chance to spawn new disc enemy
+                        enemies.push_back(spaceshooter::enemies::createDisc(Vector(x, 0)));
+                    }
+                    else if (rand < 0.35f)
+                    {
+                        // 20% chance to spawn a probe
+                        enemies.push_back(spaceshooter::enemies::createProbe(Vector(x, 0)));
+                    }
+                    else
+                    {
+                        // 65% chance to spawn an asteroid
+                        enemies.push_back(spaceshooter::enemies::createAstroid(Vector(x, 0)));
+                    }
+                }
+
+                objectQueue->pushEntityToQueue(delay, enemies);
             }
 
             auto lastEnemy = spaceshooter::enemies::createAstroid(Vector(windowSize.x / 2, 0));

@@ -26,6 +26,7 @@
 #include "sprites/healthpack.h"
 #include "sprites/title.h"
 #include "sprites/probe.h"
+#include "sprites/disc.h"
 
 Game *game = NULL;
 
@@ -63,6 +64,7 @@ static void loadResources()
     resources->loadResource("healthpack", healthpack, healthpack_len);
     resources->loadResource("title", title, title_len);
     resources->loadResource("probe", probe, probe_len);
+    resources->loadResource("disc", disc, disc_len);
 }
 
 static void registerKeyMappings()

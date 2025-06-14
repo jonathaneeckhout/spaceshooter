@@ -8,5 +8,7 @@ namespace spaceshooter
         Object *createAstroid(Vector position);
 
         Object *createProbe(Vector position);
+
+        Object *createDisc(Vector position);
     }
 }

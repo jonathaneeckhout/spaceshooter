@@ -1,10 +1,20 @@
 # spaceshooter
-A small vertical spaceshooter using the jeninge game engine.
+A small vertical spaceshooter using the jeninge game engine. This project was purely made for educational purposes but I am happy with the results. It's doesn't have a lot of game content but it is pretty hard!
+
+## Screenshots
+Some gameplay screenshots
+
+![alt text](https://github.com/jonathaneeckhout/spaceshooter/screenshots/astroids "Astroids")
+
+![alt text](https://github.com/jonathaneeckhout/spaceshooter/screenshots/enemies "Enemies")
+
+![alt text](https://github.com/jonathaneeckhout/spaceshooter/screenshots/menu "menu")
+
 
 ## Requirements
 
 - CMake ≥ 3.16
-- C++17 compiler (`clang++`)
+- C++20 compiler (`clang++`)
 
 Example using Ubuntu
 ```bash
@@ -41,19 +51,3 @@ Run the game
 ```bash
 ./build/Spaceshooter
 ```
-
-## To-do
-- Add game loop
-    - Add event when entity is destroyed
-    - Listen to this event for player and last enemy
-    - If player dies -> game over
-    - If last enemy dies -> level complete
-- Display Highscores
-- Add components to player class
-- Turn bullets to type objects
-- Create settings menu
-    - Enable disable music
-    - Keybindings
-- Add 2 extra levels
-- Replace prototypes with assets
-- (Optional) make support for bytecode to easily create new levels

@@ -37,7 +37,7 @@ void EnemyShootComponent::update(float)
 
     Vector direction = Spaceshooter::getInstance()->directionToPlayer(weaponMuzzleTransform->getGlobalPosition());
 
-    auto bullet = spaceshooter::projectiles::createBullet(weaponMuzzleTransform->getGlobalPosition(), direction, false);
+    auto bullet = spaceshooter::projectiles::createZap(weaponMuzzleTransform->getGlobalPosition(), direction, false);
 
     projectiles->addChild(bullet);
 }
