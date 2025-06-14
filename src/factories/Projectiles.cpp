@@ -43,6 +43,8 @@ namespace spaceshooter
             auto deletion = new DeleteoffScreenComponent(transform);
             obj->addChild(deletion);
 
+            Game::getInstance()->mixer->playSound("bullet");
+
             return obj;
         }
 
@@ -81,6 +83,8 @@ namespace spaceshooter
 
             auto deletion = new DeleteoffScreenComponent(transform);
             obj->addChild(deletion);
+
+            Game::getInstance()->mixer->playSound("zap");
 
             return obj;
         }

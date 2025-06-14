@@ -1,5 +1,5 @@
 # spaceshooter
-A small vertical spaceshooter using the jeninge game engine. This project was purely made for educational purposes but I am happy with the results. It's doesn't have a lot of game content but it is pretty hard!
+A small vertical space shooter built using the Jengine game engine. This project was created purely for educational purposes, but I’m happy with the results. It doesn’t have a lot of content, but it’s definitely challenging!
 
 ## Screenshots
 Some gameplay screenshots
@@ -51,3 +51,9 @@ Run the game
 ```bash
 ./build/Spaceshooter
 ```
+
+## Controls
+
+* Movement: WSAD
+* Shooting: numpad 1
+* Selecting: Enter

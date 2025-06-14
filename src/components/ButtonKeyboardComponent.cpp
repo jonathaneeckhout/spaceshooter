@@ -69,10 +69,10 @@ void ButtonKeyboardComponent::selectNextButton(int increment, bool playSound)
         nextButton->setSelected();
     }
 
-    // if (playSound && prevButton != nextButton)
-    // {
-    //     Game::getInstance()->mixer->playSound("button0");
-    // }
+    if (playSound && prevButton != nextButton)
+    {
+        Game::getInstance()->mixer->playSound("button0");
+    }
 }
 
 void ButtonKeyboardComponent::pressSelectedButton()

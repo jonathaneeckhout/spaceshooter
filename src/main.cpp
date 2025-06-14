@@ -51,7 +51,6 @@ static void loadResources()
     resources->loadResource("bulletImpact", sfx_damage_hit1, sfx_damage_hit1_len);
     resources->loadResource("zap", sfx_wpn_laser10, sfx_wpn_laser10_len);
     resources->loadResource("ZapImpact", sfx_sounds_impact3, sfx_sounds_impact3_len);
-    resources->loadResource("ZapImpact", sfx_sounds_impact3, sfx_sounds_impact3_len);
     resources->loadResource("powerup", sfx_coin_double1, sfx_coin_double1_len);
     resources->loadResource("explosion0", sfx_exp_short_hard2, sfx_exp_short_hard2_len);
     resources->loadResource("explosion1", sfx_exp_medium5, sfx_exp_medium5_len);
