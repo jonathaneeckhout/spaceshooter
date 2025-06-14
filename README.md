@@ -4,11 +4,11 @@ A small vertical spaceshooter using the jeninge game engine. This project was pu
 ## Screenshots
 Some gameplay screenshots
 
+![alt text](https://github.com/jonathaneeckhout/spaceshooter/blob/main/screenshots/menu.png "menu")
+
 ![alt text](https://github.com/jonathaneeckhout/spaceshooter/blob/main/screenshots/astroids.png "Astroids")
 
 ![alt text](https://github.com/jonathaneeckhout/spaceshooter/blob/main/screenshots/enemies.png "Enemies")
-
-![alt text](https://github.com/jonathaneeckhout/spaceshooter/blob/main/screenshots/menu.png "menu")
 
 
 ## Requirements
